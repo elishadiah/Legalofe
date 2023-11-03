@@ -1,0 +1,127 @@
+<nav class="navbar is-fixed-top is-black" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item is-hidden-tablet" href="/">
+        <img src="/favicon.png" width="24" height="24" style="margin-right: 1em;">
+        Fantalega LOFE
+      </a>
+
+      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="main-nav">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div id="main-nav" class="navbar-menu has-text-centered">
+      <div class="navbar-start">
+        <% if (typeof league != 'undefined') { %>
+            <a class="navbar-item" href="/classifica?Gir=<%= league.fantagiornata ? league.fantagiornata.girone : 1 %>">
+              Classifica
+            </a>
+        <% } else { %>
+            <a class="navbar-item" href="/classifica?Gir=1">
+              Classifica
+            </a>
+        <% } %>
+
+        <a class="navbar-item" href="/calendario">
+          Calendario
+        </a>
+
+        <a class="navbar-item" href="/invio-formazione">
+          Invio Formazione
+        </a>
+
+        <% if (typeof league != 'undefined') { %>
+            <a class="navbar-item" href="/formazioni?Gio=<%= league.nextFantagiornata ? league.nextFantagiornata.id : '' %>">
+              Formazioni Inviate
+            </a>
+        <% } else { %>
+            <a class="navbar-item" href="/formazioni?Gio=''">
+              Formazioni Inviate
+            </a>
+        <% } %>
+
+        <!-- <a class="navbar-item" href="/statistiche">
+          Statistiche
+        </a> -->
+
+        <a class="navbar-item" href="/quotazioni">
+          Statistiche & Quotazioni
+        </a>
+
+        <a class="navbar-item" href="/prob-form">
+          Probabili Formazioni
+        </a>
+
+        <% if (typeof me != 'undefined' && me.isSuperAdmin) { %>
+          <a class="navbar-item" href="/admin">
+            Admin
+          </a>
+        <% } %>
+
+        <%# <li class="menu-item"><a data-scroll="">Formazioni Inviate</a></li>
+        <li class="menu-item"><a data-scroll="">Statistiche</a></li>
+        <li class="menu-item"><a data-scroll="">Albo D'Oro</a></li>
+        <li class="menu-item"><a data-scroll="">Indisponibili</a></li> %>
+      </div>
+
+      <div class="navbar-end">
+        <% if (typeof me != 'undefined') { %>
+          <div class="navbar-item is-hidden-touch">
+            <div class="dropdown is-right">
+              <div class="dropdown-trigger">
+                <button class="button is-outlined is-white" href="/account/profile"><%= me.fullName %></button>
+              </div>
+              <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+                <div class="dropdown-content">
+                  <a href="/account/profile" class="dropdown-item">
+                    Profilo
+                  </a>
+
+                  <% if (me.team) { %>
+                  <a href="/rose/<%= me.team.id %>" class="dropdown-item">
+                    <img style="vertical-align:middle" src="/uploads/<%= me.team.logo %>">
+                    <%= me.team.name %>
+                  </a>
+                  <% } %>
+
+                  <hr class="dropdown-divider">
+
+                  <a href="/logout" class="dropdown-item">
+                    Esci
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% } else { %>
+          <div class="navbar-item">
+            <a class="button is-outlined is-white is-hidden-touch" href="/login">Login</a>
+            <a class="button is-outlined is-black is-hidden-desktop" href="/login">Login</a>
+          </div>
+        <% } %>
+
+        <% if (typeof me != 'undefined') { %>
+        <hr />
+
+        <div class="navbar-item is-hidden-desktop">
+          <a class="button is-outlined is-black is-hidden-desktop" href="/account/profile"><%= me.fullName %></a>
+        </div>
+
+        <% if (typeof me != 'undefined' && me.team) { %>
+        <a href="/rose/<%= me.team.id %>" class="navbar-item is-hidden-desktop">
+          <img style="vertical-align:middle" src="/uploads/<%= me.team.logo %>">
+          <%= me.team.name %>
+        </a>
+        <% } %>
+
+        <a href="/logout" class="navbar-item is-hidden-desktop">
+          Esci
+        </a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>

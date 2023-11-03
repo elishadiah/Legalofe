@@ -1,0 +1,241 @@
+<div class="box">
+
+<h1 class="title-bar is-size-2">
+  <span>Invio Formazione</span>
+  <% if (match) { %>
+  <%- partial('../partials/campionato', { giornata: match.IDFantagiornata }) -%>
+  <% } %>
+</h1>
+
+<div class="has-text-right">
+<% if (me && me.isSuperAdmin) { %>
+  <div class="dropdown">
+    <div class="dropdown-trigger">
+      <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+        <span>Cambia Squadra</span>
+        <span class="icon is-small">
+          <i class="fa fa-angle-down" aria-hidden="true"></i>
+        </span>
+      </button>
+    </div>
+    <div class="dropdown-menu" id="dropdown-menu" role="menu">
+      <div class="dropdown-content">
+        <% for (const t of league.teams) { %>
+          <a href="/invio-formazione/<%= t.id %>" class="dropdown-item<%= teamId === t.id ? ' is-active' : '' %>">
+            <%= t.name %>
+          </a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+<% } %>
+  <div class="select">
+    <select
+      onchange="setSearchParam('Gio', event.target.value)"
+    >
+      <option value="null">Scegli FantaGiornata</option>
+
+      <% allFantaGiornate.forEach(fg => { %>
+      <option
+        value="<%= fg.id %>"
+        <%= fg.locked ? 'disabled' : '' %>
+        <%= (fantaGiornata && fg.id === fantaGiornata.id) ? 'selected' : '' %>
+      >
+        <%= `${fg.day} - Campionato ${fg.girone === 1 ? 'Di Apertura' : 'De Clausura' }` %>
+      </option>
+      <% }) %>
+    </select>
+  </div>
+</div>
+
+<% if (fantaGiornata && fantaGiornata.locked) { %>
+<article class="message is-danger" style="margin-top:10px;">
+  <div class="message-body">
+    L'invio della formazione per questa giornata è bloccato.
+  </div>
+</article>
+<% } %>
+
+<% if (match) { %>
+<div class="is-size-4">
+  <span class="<%= match.teamHome.id != teamId ? 'has-text-grey' : '' %>"><%= match.teamHome.name %></span> -
+  <span class="<%= match.teamAway.id != teamId ? 'has-text-grey' : '' %>"><%= match.teamAway.name %></span>
+</div>
+<% } %>
+
+<% if (players.length) { %>
+<div id="invio-formazione" class="columns is-multiline">
+  <div class="column is-two-thirds">
+    <table class="table is-hoverable is-fullwidth">
+      <thead>
+        <tr>
+          <th class="has-text-centered">R</th>
+          <th>Nome</th>
+          <th class="has-text-centered is-hidden-touch">P</th>
+          <th class="has-text-centered is-hidden-touch">MVt</th>
+          <th class="has-text-centered is-hidden-touch">FMt</th>
+          <th class="has-text-centered is-hidden-touch">
+            <img src="/images/live/amm_s.png" alt="Ammonizioni" class="invform__icon" />
+          </th>
+          <th class="has-text-centered is-hidden-touch">
+            <img src="/images/live/esp_s.png" alt="Espulsioni" class="invform__icon" />
+          </th>
+          <th class="has-text-centered is-hidden-touch">
+            <img src="/images/live/golfatto_s.png" alt="Gol" class="invform__icon" />
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% players.forEach((player, i) => { %>
+          <tr>
+            <td class="has-text-centered">
+              <span id="r_ruolo<%= i %>" class="player-role player-role--<%= player.Ruolo %>"><%= sails.helpers.getPlayerRole(player.Ruolo) %></span>
+            </td>
+
+            <td style="font-weight:500;white-space:nowrap;cursor:pointer;" onclick="ClickGiocatoreRosa(<%= i %>)">
+              <span id="r_nome<%= i %>"><%= player.Nome %> <span class="has-text-grey has-text-weight-normal"><%= player.SquadraDiA %></span></span>
+            </td>
+
+            <td class="has-text-centered is-hidden-touch">
+              <%= player.album ? player.album.presences : '-' %>
+            </td>
+
+            <td class="has-text-centered is-hidden-touch">
+              <%= (player.album && player.album.totalScores && player.album.presences) ? (player.album.totalScores / player.album.presences).toFixed(1) : '-' %>
+            </td>
+
+            <td class="has-text-centered is-hidden-touch">
+                <%= (player.album && player.album.totalFantaVoti && player.album.presences) ? (player.album.totalFantaVoti / player.album.presences).toFixed(1) : '-' %>
+            </td>
+
+            <td class="has-text-centered is-hidden-touch">
+              <%= player.album ? player.album.admonitions : '-' %>
+            </td>
+
+            <td class="has-text-centered is-hidden-touch">
+              <%= player.album ? player.album.expulsions : '-' %>
+            </td>
+
+            <td class="has-text-centered is-hidden-touch">
+              <%= player.album ? player.album.goals : '-' %>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="column is-one-third">
+    <table class="table is-hoverable is-fullwidth">
+      <thead>
+        <tr>
+          <th colspan="4" class="has-text-centered"><span id="f_titolari">Titolari (0-0-0-0)</span></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% for (let i = 1; i <= 19; i++) { %>
+        <tr style="cursor: pointer" onclick="ClickGiocatoreFormazione(<%= i %>)">
+          <td width="7%"><span class="has-text-weight-medium"><%= i %></span></td>
+          <td width="7%"><span id="f_ruolo<%= i %>"></span></td>
+          <td width="85%"><span id="f_nome<%= i %>"></span></td>
+        </tr>
+
+          <% if (i === 11) { %>
+          <tr><th colspan="4" class="has-text-centered"><span id="f_riserve">Riserve (0-0-0-0)</span></th></tr>
+          <% } %>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="column is-full">
+
+    <div class="field">
+      <div class="control">
+        <label class="checkbox">
+          <input type="checkbox" name="destinatari" value="Avversario" checked="">
+          Avversario
+        </label>
+
+        <label class="checkbox">
+          <input type="checkbox" name="destinatari" value="Webmaster" checked="">
+          Webmaster
+        </label>
+
+        <label class="checkbox">
+          <input type="checkbox" name="destinatari" value="SeStessi" checked="">
+          Se stessi
+        </label>
+
+        <label class="checkbox">
+          <input type="checkbox" name="destinatari" value="Presidente" checked="">
+          Presidente di lega
+        </label>
+
+        <label class="checkbox">
+          <input type="checkbox" name="destinatari" value="Tutti">
+          Tutti i presidenti
+        </label>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="control">
+        <textarea
+          class="textarea"
+          name="comunicazioni"
+          rows="4"
+          placeholder="Comunicazioni"
+          data-gramm_editor="false"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="control">
+        <button
+          type="button"
+          class="button is-success is-hidden-touch"
+          id="btInvia"
+          name="btInvia"
+          onclick="InviaFormazione()"
+          <%= (!match || !fantaGiornata || fantaGiornata.locked) ? 'disabled' : '' %>
+        >
+          Invia formazione
+        </button>
+
+        <button
+          type="button"
+          class="button is-success is-fullwidth is-hidden-desktop"
+          id="btInvia"
+          name="btInvia"
+          onclick="InviaFormazione()"
+          <%= (!match || !fantaGiornata || fantaGiornata.locked) ? 'disabled' : '' %>
+        >
+          Invia formazione
+        </button>
+      </div>
+    </div>
+
+    <form name="emailData" id="emailData" action="" method="post" target="ssWindow">
+      <input type="hidden" id="edUsername" name="username" value="">
+      <input type="hidden" id="edPassword" name="password" value="">
+      <input type="hidden" id="edSender" name="sender" value="">
+      <input type="hidden" id="edRecipient" name="recipient" value="">
+      <input type="hidden" id="edSubject" name="subject" value="">
+      <input type="hidden" id="edBody" name="body" value="">
+      <input type="hidden" id="edGiornataDiA" name="giornataDiA" value="">
+      <input type="hidden" id="edIdSquadra" name="idSquadra" value="">
+      <input type="hidden" id="edIdIncontro" name="idIncontro" value="">
+      <input type="hidden" id="edSaveData" name="saveData" value="">
+    </form>
+  </div>
+</div>
+<% } else { %>
+<p>Non hai una squadra associata</p>
+<% } %>
+
+</div>
+<%- exposeLocalsToBrowser() %>

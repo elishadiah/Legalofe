@@ -1,0 +1,129 @@
+<div class="columns is-mobile revert-on-mobile">
+  <div class="column is-two-thirds-tablet is-full-mobile">
+    <% album.forEach(entries => { %>
+    <div class="box is-relative">
+      <div id="<%= entries.player.id %>" class="fake-anchor"></div>
+
+      <article class="media">
+        <div class="media-left">
+          <figure class="image is-64x64">
+            <img src="/uploads/foto/<%= entries.player.Codice %>.png">
+          </figure>
+        </div>
+        <div class="media-content">
+          <div class="content">
+            <div class="is-size-4"><strong><%= entries.player.Nome %></strong></div>
+
+            <p>
+              <%- include('../partials/player-role', { role: entries.player.Ruolo }) %>
+              <strong><%= entries.player.SquadraDiA %></strong>
+              <span style="margin-left: 2em;">Valore: <strong><%= entries.cost %></strong></span>
+            </p>
+
+            <table class="table is-fullwidth is-narrow is-size-7">
+              <thead>
+                <tr>
+                  <th>Anno</th>
+                  <th>FantaSquadra</th>
+                  <th>Squadra</th>
+                  <th class="has-text-centered">Pres.</th>
+                  <th class="has-text-centered">MV</th>
+                  <th class="has-text-centered">FM</th>
+                  <th class="has-text-centered">Goal</th>
+                  <th class="has-text-centered"><img src="/images/live/amm_s.png" alt="Ammonizioni" /></th>
+                  <th class="has-text-centered"><img src="/images/live/esp_s.png" alt="Espulsioni" /></th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% entries.pastYears.forEach(item => { %>
+                <tr>
+                  <td><%= `${item.season}/${item.season + 1}` %></td>
+                  <td><%= item.team ? item.team.name : '' %></td>
+                  <td><%= item.teamA %></td>
+                  <td class="has-text-centered"><%= item.presences %></td>
+                  <td class="has-text-centered"><%= item.presences ? (item.totalScores / item.presences).toFixed(1) : '-' %></td>
+                  <td class="has-text-centered"><%= item.presences ? (item.totalFantaVoti / item.presences).toFixed(1) : '-' %></td>
+                  <td class="has-text-centered"><%= item.goals %></td>
+                  <td class="has-text-centered"><%= item.admonitions %></td>
+                  <td class="has-text-centered"><%= item.expulsions %></td>
+                </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </article>
+    </div>
+    <% }) %>
+
+  </div>
+
+  <div class="column is-one-third-tablet is-full-mobile">
+    <div class="box">
+      <h2>FANTASQUADRA</h2>
+
+      <div class="squadra_rose"><%= team.name %></div>
+
+      <div class="image_rose">
+        <img src="/uploads/<%= team.logo %>" height="150" />
+      </div>
+
+      <div class="contenuti">Presidente: <strong><%= team.manager.fullName %></strong></div>
+      <% if (me) { %>
+      <div class="contenuti">Email: <%= team.manager.emailAddress %></div>
+      <% } %>
+      <div class="contenuti">Crediti residui: <strong><%= team.credits %></strong></div>
+
+      <% if (me && ((me.team && me.team.id === team.id) || me.isSuperAdmin)) { %>
+      <a class="button is-outlined is-link is-fullwidth" href="/rose/<%= team.id %>/edit">Modifica Squadra</a>
+      <% } %>
+    </div>
+
+    <div class="box">
+      <h3 class="is-size-4">I più pagati</h3>
+
+      <table class="table is-hoverable is-narrow is-fullwidth">
+        <tbody>
+          <% mostPayed.forEach(entry => { %>
+          <tr>
+            <td><%= entry.player.Nome %></td>
+            <td><%= entry.player.cost %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box">
+      <h3 class="is-size-4">I più presenti</h3>
+
+      <table class="table is-hoverable is-narrow is-fullwidth">
+        <tbody>
+          <% mostPresent.forEach(entry => { %>
+          <tr>
+            <td><%= entry.player.Nome %></td>
+            <td><%= entry.presences %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box">
+      <h3 class="is-size-4">I cannonieri</h3>
+
+      <table class="table is-hoverable is-narrow is-fullwidth">
+        <tbody>
+          <% mostScored.forEach(entry => { %>
+          <tr>
+            <td><%= entry.player.Nome %></td>
+            <td><%= entry.goals %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<%- exposeLocalsToBrowser() %>

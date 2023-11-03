@@ -1,0 +1,12 @@
+<div class="field is-grouped is-grouped-multiline is-grouped-right">
+  <div class="control">
+    <span class="tags has-addons">
+      <span class="tag is-info"><%= giornata.day %><sup>a</sup>&nbsp;<span><%= [ '', 'Apertura', 'Clausura' ][giornata.girone] %></span></span>
+      <span class="tag"><%= giornata.daySerieA %><sup>a</sup>&nbsp;Serie A</span>
+    </span>
+  </div>
+
+  <div class="control has-text-grey">
+    <%= sails.helpers.formatDate(giornata.date) %>
+  </div>
+</div>

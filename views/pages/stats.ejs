@@ -1,0 +1,39 @@
+<div class="box">
+  <table class="table is-hoverable is-fullwidth">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th class="has-text-centered">R</th>
+        <th class="has-text-centered">P</th>
+        <th class="has-text-centered">Gol</th>
+        <th class="has-text-centered">MV</th>
+        <th class="has-text-centered">FV</th>
+        <th class="has-text-centered">A</th>
+        <th class="has-text-centered">E</th>
+        <th>Fantasquadra</th>
+        <th>Squadra</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% album.forEach(entry => { %>
+      <tr>
+        <td><%= entry.player.Nome %></td>
+        <td class="has-text-centered">
+          <%- include('../partials/player-role', { role: entry.player.Ruolo }) %>
+        </td>
+        <td class="has-text-centered"><%= entry.presences %></td>
+        <td class="has-text-centered"><%= entry.goals %></td>
+        <td class="has-text-centered"><%= (entry.totalScores && entry.presences) ?
+          (entry.totalScores / entry.presences).toFixed(1) : '-' %></td>
+        <td class="has-text-centered"><%= (entry.totalFantaVoti && entry.presences) ?
+          (entry.totalFantaVoti / entry.presences).toFixed(1) : '-' %></td>
+        <td class="has-text-centered"><%= entry.admonitions %></td>
+        <td class="has-text-centered"><%= entry.expulsions %></td>
+        <td><%= entry.team ? entry.team.name : '-' %></td>
+        <td><%= entry.teamA %></td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>

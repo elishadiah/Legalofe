@@ -1,0 +1,30 @@
+<div id="new-campionato" class="box">
+  <b-steps
+    icon-pack="fa"
+    @change="onStepChange"
+  >
+    <b-step-item label="Squadre">
+      <b-taginput
+        v-model="teams"
+        :data="allTeams"
+        field="name"
+        autocomplete
+        :allow-new="false"
+        open-on-focus
+        placeholder="Iscrivi Squadra">
+      </b-taginput>
+    </b-step-item>
+
+    <b-step-item label="Calendario">
+      <div v-for="fg in fantaGiornate">
+        {{ fg.daySerieA }}a Giornata - {{ fg.date }}
+      </div>
+
+      <div v-for="match in fantaIncontri">
+        {{ match.teamHome }} - {{ match.teamAway }}
+      </div>
+    </b-step-item>
+
+    <b-step-item label="Social"></b-step-item>
+  </b-steps>
+</div>

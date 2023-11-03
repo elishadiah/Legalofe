@@ -1,0 +1,301 @@
+<div id="players-transfer">
+  <div class="box">
+    <div class="is-size-4">Trasferimento Giocatori</div>
+
+    <b-field grouped>
+      <b-autocomplete
+        :data="players"
+        field="Nome"
+        placeholder="Cerca un Giocatore"
+        :loading="loading"
+        expanded
+        @typing="getAsyncData"
+        @select="option => { player = option; team = null; searchTeam = '' }"
+      >
+        <template slot-scope="{ option }">
+          <div class="media">
+            <div class="media-left">
+              <img width="32" :src="`/uploads/foto/${option.Codice}.png`">
+            </div>
+
+            <div class="media-content">
+              <strong>{{ option.Nome }}</strong>
+
+              <div>
+                <span v-if="option.IDSquadra">{{ option.IDSquadra.name }}</span>
+                <span v-else>Nessna Squadra</span>
+
+                &bull; {{ option.SquadraDiA }} &bull; $ {{ option.cost }}
+              </div>
+            </div>
+          </div>
+        </template>
+      </b-autocomplete>
+    </b-field>
+
+    <div class="columns">
+      <div class="column">
+        <b-field>
+          <b-autocomplete
+            v-model="searchTeam"
+            :data="teamsFiltered"
+            field="name"
+            placeholder="Fanta Squadra"
+            expanded
+            open-on-focus
+            :disabled="!player"
+            @select="option => team = option"
+          >
+            <template slot-scope="{ option }">
+              <div class="media">
+                <div class="media-left">
+                  <img :src="`/uploads/${option.logo}`" width="32">
+                </div>
+
+                <div class="media-content">
+                  <strong>{{ option.name }}</strong>
+
+                  <div>
+                    $ {{ option.credits }}
+                  </div>
+                </div>
+              </div>
+            </template>
+          </b-autocomplete>
+
+          <b-input
+            v-model.number="cost"
+            type="number"
+            icon="euro"
+            icon-pack="fa"
+            min="0"
+          ></b-input>
+
+          <p class="control">
+            <b-button
+              type="is-info"
+              :disabled="!player || !team || player.cost > team.credits"
+              @click="transferPlayer()"
+            >
+              Trasferisci
+            </b-button>
+          </p>
+        </b-field>
+      </div>
+
+      <div class="column">
+        <div v-if="player && team">
+          <h2 class="is-size-5">Crediti residui dopo il trasferimento</h2>
+
+          <div v-if="cost > team.credits">
+            Non è possibile effettuare il trasferimento. {{ team.name }} non ha crediti sufficienti per acquistare {{ player.Nome }}.
+          </div>
+
+          <div v-else>
+            <div>{{ team.name }} = {{ team.credits }} - {{ cost }} = {{ team.credits - cost }}</div>
+            <div v-if="player.IDSquadra">{{ player.IDSquadra.name }} = {{ player.IDSquadra.credits }} + {{ cost }} = {{ player.IDSquadra.credits + cost }}</div>
+          </div>
+        </div>
+
+        <h2 v-else class="is-size-5">Seleziona un giocatore e una squadra</h2>
+      </div>
+    </div>
+
+    <div class="columns">
+      <div class="column">
+        <b-field>
+          <b-input
+            v-model.number="cost"
+            type="number"
+            expanded
+            icon="euro"
+            icon-pack="fa"
+            min="0"
+          ></b-input>
+
+          <p class="control">
+            <b-button
+              type="is-danger"
+              :disabled="!player || !player.IDSquadra"
+              @click="transferPlayer(true)"
+            >
+              Svincola
+            </b-button>
+          </p>
+        </b-field>
+      </div>
+
+      <div class="column">
+        <h2
+          v-if="player"
+          class="is-size-5"
+        >
+          Crediti residui dopo lo svincolamento
+        </h2>
+
+        <h2
+          v-else
+          class="is-size-5"
+        >
+          Seleziona un giocatore
+        </h2>
+
+        <div v-if="player && player.IDSquadra">{{ player.IDSquadra.name }} = {{ player.IDSquadra.credits }} + {{ cost }} = {{ player.IDSquadra.credits + cost }}</div>
+        <div v-else-if="player && !player.IDSquadra">Il giocatore non appartiene a nessuna squadra</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="is-size-4">Foto Giocatori</div>
+
+    <div class="columns">
+      <div class="column">
+        <div>
+          <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+
+          <input
+            ref="fileInput"
+            name="photos"
+            class="button"
+            type="file"
+            accept="zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed"
+            @change="onFileChange"
+          />
+
+          <b-button
+            :disabled="!fileSelected"
+            :loading="uploadingPhotos"
+            @click="uploadPhotos"
+          >
+            Carica
+          </b-button>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="notification">
+          Seleziona un file .zip contenente le foto dei giocatori nel formato
+          <em>123123.png</em>, i file possono essere in qualsiasi cartella.
+          <strong>Nota</strong>: se il file zip contiene più versioni della stessa foto (es. 32 e 67px),
+          cancella le foto che non servono dal file zip prima di caricarlo.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="is-size-4">Database Giocatori</div>
+
+    <b-button
+      type="is-info"
+      :loading="loadingUpdates"
+      :disabled="loadingUpdates"
+      @click="findUpdates"
+    >
+      Cerca Aggiornamenti
+    </b-button>
+
+    <div
+      v-if="updatesRun"
+      class="columns"
+      style="margin-top: 1em;"
+    >
+      <div class="column">
+        <b-notification :closable="false">
+          <span v-if="updatesNew.length">
+            Sono stati trovati {{ updatesNew.length }} nuovi giocatori.
+          </span>
+
+          <span v-else>Non sono stati trovati nuovi giocatori</span>
+        </b-notification>
+
+        <table class="table is-hoverable is-fullwidth">
+          <thead>
+            <tr>
+              <th>Squadra A</th>
+              <th>Nome</th>
+              <th>R</th>
+              <th>Q</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr
+              v-for="player in updatesNew"
+              :key="'player-' + player.name + player.id"
+            >
+              <td class="is-capitalized">{{ player.teamA }}</td>
+              <td>{{ player.name }}</td>
+              <td>
+                <span
+                  class="player-role"
+                  :class="`player-role--${getRoleNumber(player.role)}`">{{ player.role }}</span>
+              </td>
+              <td>{{ player.Q }}</td>
+              <td>
+                <b-button
+                  :loading="player._loading"
+                  :disabled="player._loading"
+                  @click="importPlayer(player)"
+                >
+                  Importa
+                </b-button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="column">
+        <b-notification :closable="false">
+          <span v-if="updatesTransfers.length">
+            {{ updatesTransfers.length }} giocatori hanno cambiato squadra.
+          </span>
+
+          <span v-else>Non sono stati trovati giocatori aggiornati</span>
+        </b-notification>
+
+        <table class="table is-hoverable is-fullwidth">
+          <thead>
+            <tr>
+              <th>Squadra A</th>
+              <th>FantaSquadra</th>
+              <th>Nome</th>
+              <th>R</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr
+              v-for="player in updatesTransfers"
+              :key="'player-' + player.name + player.id"
+            >
+              <td>{{ player.player.SquadraDiA }} &rArr; {{ player.teamA }}</td>
+              <td>{{ player.player.IDSquadra ? player.player.IDSquadra.name : '-' }}</td>
+              <td>{{ player.name }}</td>
+              <td>
+                <span
+                  class="player-role"
+                  :class="`player-role--${getRoleNumber(player.role)}`">{{ player.role }}</span>
+              </td>
+              <td>
+                <b-button
+                  :loading="player._loading"
+                  :disabled="player._loading"
+                  @click="updatePlayer(player)"
+                >
+                  Aggiorna
+                </b-button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- exposeLocalsToBrowser() %>

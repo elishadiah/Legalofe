@@ -1,0 +1,27 @@
+<%- include('hero-box', {
+  title: 'Top Team',
+  image: topFlopTeams[topFlopTeams.length-1] ? `/uploads/${topFlopTeams[topFlopTeams.length-1].team.logo}` : null,
+  name: topFlopTeams[topFlopTeams.length-1] ? topFlopTeams[topFlopTeams.length-1].team.name : null,
+  value: topFlopTeams[topFlopTeams.length-1] ? topFlopTeams[topFlopTeams.length-1].bonus : null,
+  badge: null,
+  footer: null
+}) -%>
+
+<%- include('hero-box', {
+  title: 'Flop Team',
+  image: topFlopTeams[0] ? `/uploads/${topFlopTeams[0].team.logo}` : null,
+  name: topFlopTeams[0] ? topFlopTeams[0].team.name : null,
+  value: topFlopTeams[0] ? topFlopTeams[0].bonus : null,
+  badge: null,
+  footer: null
+}) -%>
+
+<%- include('hero-box', {
+  title: 'Top Player',
+  image: topPlayer ? `/uploads/foto/${topPlayer.player.Codice}.png` : null,
+  name: topPlayer ? topPlayer.player.Nome : null,
+  value: topPlayer ? topPlayer.fantaVoto : null,
+  badge: topPlayer ? topPlayer.fantaVoto - topPlayer.voto : null,
+  badgeClass: (topPlayer && (topPlayer.fantaVoto - topPlayer.voto > 0)) ? 'has-background-success' : 'has-background-danger',
+  footer: topPlayer ? topPlayer.player.team.name : null
+}) -%>

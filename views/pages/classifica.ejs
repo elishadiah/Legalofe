@@ -1,0 +1,108 @@
+<div class="box">
+  <h1 class="is-size-2">
+    Classifica
+
+    <small class="has-text-grey"><%= `${league.season}/${league.season+1}` %></small>
+  </h1>
+
+  <div class="buttons has-addons is-right" style="margin-bottom:1em;">
+    <a href="?Gir=1" class="button <%= (req.query.Gir == 1 || !req.query.Gir) ? 'is-info is-selected' : '' %>">
+      Campionato di Apertura
+    </a>
+
+    <a href="?Gir=2" class="button <%= req.query.Gir == 2 ? 'is-info is-selected' : '' %>">
+      Campionato di Clausura
+    </a>
+  </div>
+
+  <div class="table-container">
+    <table
+      class="table is-fullwidth is-hoverable"
+      style="border-collapse:separate"
+    >
+      <thead>
+        <tr>
+          <th colspan="4"></th>
+          <th colspan="9" class="has-text-centered is-sticky-header"><span>PARTITE</span></th>
+          <th></th>
+          <th colspan="6" class="has-text-centered is-sticky-header"><span>RETI</span></th>
+          <th colspan="3" class="has-text-centered is-sticky-header"><span>TOTALE</span></th>
+        </tr>
+
+        <tr>
+          <th class="has-text-centered">Pos</th>
+          <th class="has-text-centered is-sticky has-background-white">Squadra</th>
+          <th class="has-text-centered">Presidente</th>
+          <th class="has-text-centered">PT</th>
+
+          <th class="has-text-centered">CV</th>
+          <th class="has-text-centered">CN</th>
+          <th class="has-text-centered">CP</th>
+          <th class="has-text-centered">FV</th>
+          <th class="has-text-centered">FN</th>
+          <th class="has-text-centered">FP</th>
+          <th class="has-text-centered">V</th>
+          <th class="has-text-centered">N</th>
+          <th class="has-text-centered">P</th>
+
+          <th class="has-text-centered">MI</th>
+
+          <th class="has-text-centered">CF</th>
+          <th class="has-text-centered">CS</th>
+          <th class="has-text-centered">FF</th>
+          <th class="has-text-centered">FS</th>
+          <th class="has-text-centered">F</th>
+          <th class="has-text-centered">S</th>
+
+          <th class="has-text-centered">Med</th>
+          <th class="has-text-centered">Min</th>
+          <th class="has-text-centered">Max</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% classifica.forEach((entry, position) => {
+          let klass = (me && me.team && (me.team.id === entry.team.id)) ? 'is-selected has-background-info' : ''
+          klass += position === 0 ? 'ranking--first' : ''
+          klass += position === classifica.length - 3 ? 'ranking--last' : ''
+        %>
+        <tr class="<%= klass %>">
+          <td class="has-text-weight-medium"><%= position + 1 %></td>
+          <td
+            class="is-sticky has-text-weight-medium <%= (me && me.team && (me.team.id === entry.team.id)) ? 'is-selected has-background-info' : 'has-background-white' %>"
+            style="white-space: nowrap"
+          >
+            <%= entry.team.name %>
+          </td>
+          <td style="white-space: nowrap"><%= entry.team.manager.fullName %></td>
+          <td class="has-text-centered has-text-weight-medium"><%= entry.points %></td>
+
+          <td class="has-text-centered" style="border-left:1px solid lightgrey"><%= entry.wonHome %></td>
+          <td class="has-text-centered"><%= entry.drawnHome %></td>
+          <td class="has-text-centered"><%= entry.lostHome %></td>
+          <td class="has-text-centered" style="border-left:1px solid lightgrey"><%= entry.wonAway %></td>
+          <td class="has-text-centered"><%= entry.drawnAway %></td>
+          <td class="has-text-centered"><%= entry.lostAway %></td>
+          <td class="has-text-centered" style="border-left:1px solid lightgrey"><%= entry.wonHome + entry.wonAway %></td>
+          <td class="has-text-centered"><%= entry.drawnHome + entry.drawnAway %></td>
+          <td class="has-text-centered"><%= entry.lostHome + entry.lostAway %></td>
+
+          <td class="has-text-centered" style="border-left:1px solid lightgrey"><%= entry.MI %></td>
+
+          <td class="has-text-centered" style="border-left:1px solid lightgrey"><%= entry.goalsHome %></td>
+          <td class="has-text-centered"><%= entry.goalsAgainstHome %></td>
+          <td class="has-text-centered" style="border-left:1px solid lightgrey"><%= entry.goalsAway %></td>
+          <td class="has-text-centered"><%= entry.goalsAgainstAway %></td>
+          <td class="has-text-centered" style="border-left:1px solid lightgrey"><%= entry.goalsHome + entry.goalsAway %></td>
+          <td class="has-text-centered"><%= entry.goalsAgainstHome + entry.goalsAgainstAway %></td>
+
+          <td class="has-text-centered" style="border-left:1px solid lightgrey"><%= entry.totalAvg %></td>
+          <td class="has-text-centered"><%= entry.totalMin %></td>
+          <td class="has-text-centered"><%= entry.totalMax %></td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>

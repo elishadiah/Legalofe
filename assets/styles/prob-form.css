@@ -1,0 +1,462 @@
+.prob-form__header {
+  display: flex;
+  overflow: auto;
+  position: sticky;
+  top: 3.25rem;
+}
+.prob-form__header .prob-form__match {
+  flex: 1;
+  padding: 1em;
+  display: block;
+  cursor: pointer;
+}
+
+.probabiliFormazioni .matchFieldContainer .singleMatchFieldContainer {
+    display: none
+}
+
+.probabiliFormazioni .matchFieldContainer .singleMatchFieldContainer.active {
+    display: block
+}
+
+.probabiliFormazioni .matchFieldContainer .lastUpdate {
+    font-size: 11px;
+    display: block;
+    text-align: center;
+    color: #737373
+}
+
+@media only screen and (max-width: 599px) {
+    .probabiliFormazioni .matchFieldContainer .arrows {
+        display: none
+    }
+}
+
+.probabiliFormazioni .matchFieldContainer .arrows a {
+    position: absolute;
+    top: 40px;
+    z-index: 9
+}
+
+.probabiliFormazioni .matchFieldContainer .arrows a .icon {
+    margin: 0;
+    float: none;
+    color: #000;
+    font-size: 30px
+}
+
+.probabiliFormazioni .matchFieldContainer .arrows a.previousMatch {
+    left: 10px
+}
+
+.probabiliFormazioni .matchFieldContainer .arrows a.nextMatch {
+    right: 10px
+}
+
+.probabiliFormazioni .matchFieldContainer .match {
+    overflow: hidden;
+    margin: 10px 0
+}
+
+.probabiliFormazioni .matchFieldContainer .match .team {
+    font-size: 20px;
+    float: left;
+    width: 49%;
+    color: #f27800
+}
+
+@media only screen and (max-width: 599px) {
+    .probabiliFormazioni .matchFieldContainer .match .team {
+        font-size: 16px
+    }
+    .probabiliFormazioni .matchFieldContainer .match .team .teamName {
+        position: relative;
+        text-transform: capitalize
+    }
+    .probabiliFormazioni .matchFieldContainer .match .team.homeTeam {
+        text-align: right
+    }
+    .probabiliFormazioni .matchFieldContainer .match .team.homeTeam .teamName {
+        float: left;
+        text-align: right;
+        width: 90px
+    }
+    .probabiliFormazioni .matchFieldContainer .match .team.homeTeam .calcio-championsleague-teams-icon {
+        float: right
+    }
+    .probabiliFormazioni .matchFieldContainer .match .team.awayTeam {
+        float: right
+    }
+    .probabiliFormazioni .matchFieldContainer .match .team.awayTeam .teamName {
+        float: right;
+        text-align: left;
+        width: 90px
+    }
+    .probabiliFormazioni .matchFieldContainer .match .team.awayTeam .calcio-championsleague-teams-icon {
+        float: left
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 1023px) {
+    .probabiliFormazioni .matchFieldContainer .match .team .teamName {
+        position: relative;
+        text-transform: capitalize
+    }
+    .probabiliFormazioni .matchFieldContainer .match .team.homeTeam {
+        text-align: right
+    }
+    .probabiliFormazioni .matchFieldContainer .match .team.homeTeam .teamName {
+        float: left;
+        text-align: right;
+        width: 145px
+    }
+    .probabiliFormazioni .matchFieldContainer .match .team.homeTeam .calcio-championsleague-teams-icon {
+        float: right
+    }
+    .probabiliFormazioni .matchFieldContainer .match .team.awayTeam {
+        float: right
+    }
+    .probabiliFormazioni .matchFieldContainer .match .team.awayTeam .teamName {
+        float: right;
+        text-align: left;
+        width: 145px
+    }
+    .probabiliFormazioni .matchFieldContainer .match .team.awayTeam .calcio-championsleague-teams-icon {
+        float: left
+    }
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+    .probabiliFormazioni .matchFieldContainer .match .team .teamName {
+        position: relative;
+        top: -10px;
+        text-transform: capitalize
+    }
+    .probabiliFormazioni .matchFieldContainer .match .team.homeTeam {
+        text-align: right
+    }
+    .probabiliFormazioni .matchFieldContainer .match .team.awayTeam {
+        float: right
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    .probabiliFormazioni .matchFieldContainer .match .team .teamName {
+        position: relative;
+        top: -10px;
+        text-transform: capitalize
+    }
+    .probabiliFormazioni .matchFieldContainer .match .team.homeTeam {
+        text-align: right
+    }
+    .probabiliFormazioni .matchFieldContainer .match .team.awayTeam {
+        float: right
+    }
+}
+
+.probabiliFormazioni .matchFieldContainer .matchFieldInner {
+    margin: 0 25px
+}
+
+@media only screen and (min-width: 600px) and (max-width: 1023px) {
+    .probabiliFormazioni .matchFieldContainer .matchFieldInner {
+        margin: 0
+    }
+}
+
+@media only screen and (max-width: 599px) {
+    .probabiliFormazioni .matchFieldContainer .matchFieldInner {
+        margin: 0
+    }
+}
+
+.probabiliFormazioni .matchFieldContainer .moduleDetails {
+    overflow: hidden;
+    margin-bottom: 10px;
+    display: flex;
+}
+
+@media only screen and (min-width: 600px) and (max-width: 1023px) {
+    .probabiliFormazioni .matchFieldContainer .moduleDetails {
+        border-bottom: 1px solid #cababc;
+        padding-bottom: 10px
+    }
+}
+
+@media only screen and (max-width: 599px) {
+    .probabiliFormazioni .matchFieldContainer .moduleDetails {
+        border-bottom: 1px solid #cababc;
+        padding-bottom: 10px
+    }
+}
+
+.probabiliFormazioni .matchFieldContainer .moduleDetails .matchDateTime {
+    text-align: center;
+    text-transform: uppercase;
+    color: #737373;
+    font-size: 11px;
+    margin-top: 10px
+}
+
+@media only screen and (min-width: 600px) and (max-width: 1023px) {
+    .probabiliFormazioni .matchFieldContainer .moduleDetails .matchDateTime {
+        margin-top: 5px
+    }
+}
+
+@media only screen and (max-width: 599px) {
+    .probabiliFormazioni .matchFieldContainer .moduleDetails .matchDateTime {
+        margin-top: 5px
+    }
+}
+
+.probabiliFormazioni .matchFieldContainer .moduleDetails .singleModule {
+    flex: 1;
+    font-size: 16px;
+}
+
+@media only screen and (min-width: 600px) and (max-width: 1023px) {
+    .probabiliFormazioni .matchFieldContainer .moduleDetails .singleModule {
+        width: 35%
+    }
+}
+
+@media only screen and (max-width: 599px) {
+    .probabiliFormazioni .matchFieldContainer .moduleDetails .singleModule {
+        width: 27%
+    }
+    .probabiliFormazioni .matchFieldContainer .moduleDetails .singleModule.awayModule {
+        float: left
+    }
+}
+
+.probabiliFormazioni .matchFieldContainer .moduleDetails .singleModule .mister {
+    font-size: 11px;
+    color: #737373
+}
+
+.probabiliFormazioni .matchFieldContainer .moduleDetails .singleModule .mister strong {
+    color: #000
+}
+
+@media only screen and (max-width: 599px) {
+    .probabiliFormazioni .matchFieldContainer .moduleDetails .singleModule .mister {
+        line-height: 1.2em;
+        display: block;
+        margin-top: 5px
+    }
+}
+
+.probabiliFormazioni .matchFieldContainer .moduleDetails .singleModule.awayModule {
+    text-align: right
+}
+
+.probabiliFormazioni .matchFieldContainer .fieldLink {
+    margin: 15px 0 25px;
+    text-align: center
+}
+
+.probabiliFormazioni .matchFieldContainer .fieldLink a {
+    border: 2px solid #cababc;
+    border-radius: 2px;
+    padding: 3px 5px;
+    color: #f27800;
+    font-size: 13px;
+}
+
+.probabiliFormazioni .matchFieldContainer .matchDetails {
+    overflow: hidden;
+    margin-bottom: 15px;
+    clear: both
+}
+
+.probabiliFormazioni .matchFieldContainer .matchDetails p {
+    font-size: 11px;
+    color: #808285;
+    margin-bottom: 0;
+    padding: 3px 4px
+}
+
+.probabiliFormazioni .matchFieldContainer .matchDetails p.selected-item {
+    background: #e3bbbf;
+    color: #000
+}
+
+.probabiliFormazioni .matchFieldContainer .matchDetails p strong {
+    font-size: 11px;
+    color: #000
+}
+
+.probabiliFormazioni .matchFieldContainer .matchDetails .homeDetails {
+    width: 50%;
+    float: left;
+    border-right: 1px solid lightgrey;
+    text-align: right;
+    padding-right: 11px
+}
+
+.probabiliFormazioni .matchFieldContainer .matchDetails .awayDetails {
+    width: 50%;
+    float: right;
+    padding-left: 11px
+}
+
+ul.team-players-container {
+    overflow: hidden;
+    clear: both;
+    border-top: 1px solid #cababc;
+    padding-top: 20px
+}
+
+@media only screen and (min-width: 600px) and (max-width: 1023px) {
+    ul.team-players-container {
+        border-top: none;
+        padding-top: 10px
+    }
+}
+
+@media only screen and (max-width: 599px) {
+    ul.team-players-container {
+        border-top: none;
+        padding-top: 10px
+    }
+}
+
+ul.team-players-container ul.team-players {
+    list-style-type: none;
+    width: 100%;
+    margin: 0;
+    padding-bottom: 15px;
+    overflow: visible !important;
+}
+
+ul.team-players-container ul.team-players.left {
+    border-right: 1px dashed #737373;
+    position: relative
+}
+
+ul.team-players-container ul.team-players.left li .team-player {
+    text-align: right
+}
+
+ul.team-players-container ul.team-players.right li .team-player {
+    text-align: left;
+    float: right
+}
+
+ul.team-players-container ul.team-players.right li .numero {
+    float: left
+}
+
+ul.team-players-container ul.team-players li {
+    font-size: 13px;
+    padding: 2px 0;
+    clear: both;
+    width: 100%;
+    overflow: hidden
+}
+
+ul.team-players-container ul.team-players li.selected-item {
+    background: #e3bbbf
+}
+
+ul.team-players-container ul.team-players li span {
+    display: inline-block
+}
+
+ul.team-players-container ul.team-players li.modulo {
+    padding: 5px 0 10px
+}
+
+ul.team-players-container ul.team-players li.modulo .team-player {
+    color: #000;
+    margin-top: 0;
+    font-size: 20px;
+}
+
+ul.team-players-container ul.team-players li.heading {
+    padding: 6px 0
+}
+
+ul.team-players-container ul.team-players li.heading .team-player {
+    margin-top: 0;
+    color: #999;
+    font-size: 11px
+}
+
+ul.team-players-container ul.team-players li.heading .numero {
+    color: #999;
+    font-size: 11px
+}
+
+ul.team-players-container ul.team-players li.last-player .team-player {
+    color: #000
+}
+
+ul.team-players-container ul.team-players li .team-player {
+    color: #000;
+    margin-top: 4px;
+    width: 80%;
+    float: left;
+    font-size: 13px;
+    text-transform: uppercase
+}
+
+@media only screen and (max-width: 599px) {
+    ul.team-players-container ul.team-players li .team-player {
+        width: 75%
+    }
+}
+
+ul.team-players-container ul.team-players li .numero {
+    float: right;
+    color: #fff;
+    width: 18%;
+    text-align: center;
+}
+
+@media only screen and (max-width: 599px) {
+    ul.team-players-container ul.team-players li .numero {
+        width: 25%
+    }
+}
+
+ul.team-players-container ul.team-players li .numero span {
+    border-radius: 2px;
+    width: 20px;
+    height: 18px;
+    padding: 0;
+    text-align: center;
+    line-height: 18px;
+    background: #f27800
+}
+
+ul.team-players-container li.team-players-inner {
+    list-style-type: none;
+    width: 50%
+}
+
+ul.team-players-container li.team-players-inner:first-child {
+    float: left
+}
+
+ul.team-players-container li.team-players-inner:first-child ul.team-players {
+    border-right: 1px solid lightgrey;
+}
+
+ul.team-players-container li.team-players-inner:first-child ul.team-players li .team-player {
+    text-align: right
+}
+
+ul.team-players-container li.team-players-inner:first-child+li {
+    float: right
+}
+
+ul.team-players-container li.team-players-inner:first-child+li ul.team-players li .team-player {
+    text-align: left;
+    float: right
+}
+
+ul.team-players-container li.team-players-inner:first-child+li ul.team-players li .numero {
+    float: left
+}

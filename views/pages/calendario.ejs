@@ -1,0 +1,38 @@
+<div class="box">
+
+	<h1 class="is-size-2">Calendario <small class="has-text-grey"><%= `${league.season}/${league.season+1}` %></small></h1>
+
+	<div class="columns is-multiline has-text-black">
+	<% for (let i in incontriGiornata) {
+		const incontri = incontriGiornata[i]; %>
+
+		<div class="column is-half-tablet is-one-third-desktop is-one-quarter-fullhd risultato">
+			<nav class="panel">
+				<p
+					class="panel-heading has-text-centered has-background-black has-text-white"
+					style="border:none"
+				>
+					<%= incontri[0].IDFantagiornata.day %><sup>a</sup> - Campionato
+					<%= [ '', 'Di Apertura', 'De Clausura' ][incontri[0].IDFantagiornata.girone] %>
+				</p>
+				<p class="panel-block has-text-centered has-background-light" style="display:block">
+					<%= incontri[0].IDFantagiornata.daySerieA %><sup>a</sup> Serie A -
+					<%= sails.helpers.formatDate(incontri[0].IDFantagiornata.date) %>
+				</p>
+				<% incontri.forEach(incontro => { %>
+				<a class="panel-block" href="risultati?Gio=<%= incontro.IDFantagiornata.id %>&Inco=<%= incontro.id %>">
+				<div class="risultato__match">
+					<div class="risultato__match__team has-text-right"><%= incontro.teamHome.name %></div>
+					<div class="risultato__match__score">
+						<%= incontro.goalsHome %> - <%= incontro.goalsAway %>
+					</div>
+					<div class="risultato__match__team has-text-left"><%= incontro.teamAway.name %></div>
+				</div>
+				</a>
+				<% }) %>
+			</nav>
+		</div>
+	<% } %>
+	</div>
+</div>
+<%- exposeLocalsToBrowser() %>

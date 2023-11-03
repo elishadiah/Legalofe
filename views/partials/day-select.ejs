@@ -1,0 +1,7 @@
+<select class="day-select" onchange="setSearchParam('cGio', this.value)">
+<% for (let day = 1; day <= 38; day++) { %>
+  <option
+    value="<%= day %>"
+    <%= nextMatch == day ? 'selected' : '' %>><%= day %></option>
+<% } %>
+</select>

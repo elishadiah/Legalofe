@@ -1,0 +1,83 @@
+<div class="box">
+    <div class="dropdown is-fullwidth">
+      <div class="dropdown-trigger">
+        <button class="button is-fullwidth" aria-haspopup="true" aria-controls="dropdown-menu">
+          <span>Stagione <%= `${league.season} / ${league.season + 1}` %></span>
+          <span class="icon is-small">
+            <i class="fa fa-angle-down" aria-hidden="true"></i>
+          </span>
+        </button>
+      </div>
+
+      <div class="dropdown-menu" role="menu">
+        <div class="dropdown-content">
+          <a
+            class="dropdown-item<%= 2019 == league.season ? ' is-active' : '' %>"
+            onclick="document.cookie = 'season='; location.reload()"
+          >
+            2023 / 2024
+          </a>
+
+          <hr class="dropdown-divider">
+          <div class="dropdown-item"><small class="has-text-grey">Stagioni passate</small></div>
+                    <% for (let s = 2022; s >= 2022; s--) { %>
+          <a
+            class="dropdown-item<%= s == league.season ? ' is-active' : '' %>"
+            onclick="console.log('h'); document.cookie = 'season=<%= s %>'; location.reload()"
+          >
+            <%= `${s} / ${s + 1}` %>
+          </a>
+
+
+          <% } %>
+
+          
+                    <% for (let s = 2021; s >= 2021; s--) { %>
+          <a
+            class="dropdown-item<%= s == league.season ? ' is-active' : '' %>"
+            onclick="console.log('h'); document.cookie = 'season=<%= s %>'; location.reload()"
+          >
+            <%= `${s} / ${s + 1}` %>
+          </a>
+
+
+          <% } %>
+
+          
+                    <% for (let s = 2020; s >= 2020; s--) { %>
+          <a
+            class="dropdown-item<%= s == league.season ? ' is-active' : '' %>"
+            onclick="console.log('h'); document.cookie = 'season=<%= s %>'; location.reload()"
+          >
+            <%= `${s} / ${s + 1}` %>
+          </a>
+
+
+          <% } %>
+
+
+          <% for (let s = 2019; s >= 2019; s--) { %>
+          <a
+            class="dropdown-item<%= s == league.season ? ' is-active' : '' %>"
+            onclick="console.log('h'); document.cookie = 'season=<%= s %>'; location.reload()"
+          >
+            <%= `${s} / ${s + 1}` %>
+          </a>
+
+
+          <% } %>
+
+          <% for (let s = 2018; s >= 2018; s--) { %>
+            <a
+              class="dropdown-item<%= s == league.season ? ' is-active' : '' %>"
+              onclick="console.log('h'); document.cookie = 'season=<%= s %>'; location.reload()"
+            >
+              <%= `${s} / ${s + 1}` %>
+            </a>
+  
+            
+            <% } %>
+        </div>
+      </div>
+    </div>
+  </div>

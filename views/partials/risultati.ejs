@@ -1,0 +1,24 @@
+<div class="box">
+  <h2 class="title-bar is-size-4">
+    <span style="flex-basis: 50%;">Risultati</span>
+    <% if (risultati.length) { %>
+    <%- partial('campionato', { giornata: risultati[0].IDFantagiornata }) -%>
+    <% } %>
+  </h2>
+
+  <% if (risultati.length) { %>
+  <nav class="panel is-borderless has-text-weight-medium">
+    <% risultati.forEach((match, i) => { %>
+    <a
+      href="/risultati?Gio=<%= league.fantagiornata.id %>&Inco=<%= match.id %>"
+      class="panel-block"
+    >
+      <span style="flex:1;"><%= match.teamHome.name %>  -  <%= match.teamAway.name %></span>
+      <span><%= match.goalsHome %>  -  <%= match.goalsAway %></span>
+    </a>
+    <% }) %>
+  </nav>
+  <% } else { %>
+  <i class="has-text-dark"><small>Nessun incontro giocato</small></i>
+  <% } %>
+</div>

@@ -1,0 +1,14 @@
+<p style="margin-bottom: 25px;"><%= team.name %> ha schierato la formazione per la giornata <%= match.IDFantagiornata.day %></p>
+<p style="margin-bottom: 25px;text-indent:1em;"><em><%= message %></em></p>
+
+<p style="margin-bottom: 25px;font-size:18px;font-weight:bold;">Formazione Completa</p>
+
+<% for (const i in players) { %>
+  <p><%= players[i].Nome %></p>
+  <% if (i == 10) { %><p><u>Panchina</u></p><% } %>
+  <% if (i == 18) { %><p><u>Non in formazione</u></p><% } %>
+<% } %>
+
+<div style="margin-bottom: 25px; text-align: center;">
+  <a style="background-color: #28AFB0; display: inline-block; font-size: 1.1em; color: #fff; padding: 10px 35px 10px; font-weight: 500; text-decoration: none; border-radius: 7px;" href="<%= url.resolve(sails.config.custom.baseUrl, `/formazioni?Gio=${match.IDFantagiornata.id}&Inco=${match.id}`) %>">Vedi la formazione</a>
+</div>

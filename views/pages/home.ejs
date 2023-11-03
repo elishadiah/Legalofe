@@ -1,0 +1,72 @@
+<div
+  id="home"
+  class="columns is-multiline is-mobile"
+>
+  <div class="column is-full">
+    <div v-cloak>
+      <match-results
+        score-source="fg"
+        calculate-score
+        :fantagiornata-id="<%= nextFantagiornata ? nextFantagiornata.id : null %>"
+        live
+        :show-standings="false"
+      ></match-results>
+    </div>
+  </div>
+  
+  
+
+  <div class="column is-two-thirds-desktop is-full-mobile">
+    <div class="box">
+      <%- partial('../partials/loghi') %>
+    </div>
+
+    <%- partial('../partials/risultati-dettaglio') %>
+
+    <div class="is-hidden-tablet" style="margin-bottom: 1.5rem;">
+      <%- partial('../partials/prossimo-turno') %>
+    </div>
+
+    <div class="box">
+      <%- partial('../partials/top-flop-11') %>
+    </div>
+
+    <div class="columns">
+      <div class="column is-half">
+        <div class="box">
+          <%- partial('../partials/cannonieri') %>
+        </div>
+      </div>
+
+      <div class="column is-half">
+        <%- partial('../partials/top-flop-team') %>
+      </div>
+    </div>
+  </div>
+
+  <div class="column is-one-third-desktop is-full-mobile">
+    <div class="is-hidden-mobile" style="margin-bottom: 1.5rem;">
+      <%- partial('../partials/season-switcher') %>
+    </div>
+
+    <count-down deadline="<%= standingsDeadline %>"></count-down>
+
+    <div class="is-hidden-mobile" style="margin-bottom: 1.5rem;">
+      <%- partial('../partials/risultati') %>
+    </div>
+
+    <div class="is-hidden-mobile" style="margin-bottom: 1.5rem;">
+      <%- partial('../partials/prossimo-turno') %>
+    </div>
+
+    <div class="is-hidden-mobile" style="margin-bottom: 1.5rem;">
+      <%- partial('../partials/mini-classifica') %>
+    </div>
+
+    <div class="box">
+      <%- partial('../partials/big-match') %>
+    </div>
+  </div>
+</div>
+
+<%- exposeLocalsToBrowser() %>

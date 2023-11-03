@@ -1,0 +1,7 @@
+tr.ranking--first td {
+  border-bottom: 2px solid green;
+}
+
+tr.ranking--last td {
+  border-bottom: 2px solid red;
+}

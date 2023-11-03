@@ -1,0 +1,83 @@
+<div id="quotazioni" class="box">
+  <div class="field">
+    <label class="label">Ruolo</label>
+    <div class="control">
+      <div class="buttons has-addons">
+        <% ['P','D','C','A'].forEach((role, i) => { %>
+        <button
+          class="button"
+          :class="{ 'is-selected is-info': filter.includes('Ruolo=<%= i+1 %>') }"
+          :disabled="loading"
+          @click="toggleFilter('Ruolo=<%= i+1 %>')"
+        >
+          <%= role %>
+        </button>
+        <% }) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Squadra</label>
+    <div class="control">
+      <div class="buttons has-addons">
+        <% allTeams.forEach(team => { %>
+        <button
+          class="button is-uppercase"
+          :class="{ 'is-selected is-info': filter.includes('SquadraDiA=<%= team.SquadraDiA %>') }"
+          :disabled="loading"
+          @click="toggleFilter('SquadraDiA=<%= team.SquadraDiA %>')"
+        >
+          <%= team.SquadraDiA.slice(0,3) %>
+        </button>
+        <% }) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="field has-addons">
+    <div class="control">
+      <input
+        class="input"
+        type="text"
+        placeholder="Nome"
+        v-model="nameSearch"
+        @keyup.enter="searchByName"
+      >
+    </div>
+
+    <div class="control">
+      <button
+        class="button is-info"
+        :disabled="loading"
+        @click="searchByName"
+      >
+        Cerca
+      </button>
+    </div>
+  </div>
+
+  <table class="table is-fullwidth is-hoverable" v-cloak>
+    <thead>
+      <tr>
+        <th>Ruolo</th>
+        <th>Nome</th>
+        <th>Squadra</th>
+        <th>Quotazione</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr v-for="player in players" :key="player.id">
+        <td><player-role :role="player.Ruolo" /></td>
+        <td>{{ player.Nome }}</td>
+        <td>{{ player.SquadraDiA }}</td>
+        <td>{{ player.cost }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div v-if="loading" class="has-text-centered has-text-grey">Caricamento in corso...</div>
+</div>
+
+<%- exposeLocalsToBrowser() %>

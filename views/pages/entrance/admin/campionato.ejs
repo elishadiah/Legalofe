@@ -1,0 +1,379 @@
+<div id="admin-campionato">
+  <b-table
+    :data="allFantaGiornate"
+    :columns="columns"
+    hoverable
+    :loading="loading"
+    :selected="selected"
+  >
+    <template slot-scope="{ row, index }">
+      <b-table-column label="Giornata" centered>
+        {{ row.day }}
+      </b-table-column>
+
+      <b-table-column label="Giornata A" centered>
+        {{ row.daySerieA }}
+      </b-table-column>
+
+      <b-table-column label="Girone" centered>
+        {{ row.girone === 1 ? 'Apertura' : 'Clausura' }}
+      </b-table-column>
+
+      <b-table-column label="Data" centered>
+        <b-datepicker
+          v-model="row.date"
+          placeholder="Seleziona una data..."
+          icon="calendar"
+          icon-pack="fa"
+          :date-formatter="fmtDate"
+          :first-day-of-week="1"
+          :close-on-click="false"
+        >
+          <b-button
+            type="is-success"
+            @click="saveFg(index)"
+          >
+            Salva
+          </b-button>
+        </b-datepicker>
+      </b-table-column>
+
+      <b-table-column label="Scadenza" centered>
+        <b-datetimepicker
+          v-model="row.deadline"
+          placeholder="Seleziona una data..."
+          icon="calendar"
+          icon-pack="fa"
+          :datetime-formatter="fmtDateTime"
+          :first-day-of-week="1"
+        >
+          <template slot="right">
+            <b-button
+              type="is-success"
+              @click="saveFg(index)"
+            >
+              Salva
+            </b-button>
+          </template>
+        </b-datetimepicker>
+      </b-table-column>
+
+      <b-table-column label="Calcolata" centered>
+        <i
+          v-if="row.calculated"
+          class="fa fa-check-circle has-text-success"
+        ></i>
+        <template v-else-if="new Date(row.date) < new Date()">
+          <button
+            v-if="row.id === league.nextFantagiornata.id"
+            class="button"
+            @click="saltaGiornata(row.id)"
+          >
+            Salta
+          </button>
+
+          <button
+            v-else
+            class="button"
+            @click="openDialog(row.id)"
+          >
+            Calcola
+          </button>
+        </template>
+      </b-table-column>
+
+      <b-table-column label="Invio Form">
+        <button
+          v-if="row.locked"
+          class="button"
+          @click="lockFantaGiornata(row.id, false)"
+        >
+          <span class="icon">
+            <i class="fa fa-unlock"></i>
+          </span>
+
+          <span>Sblocca</span>
+        </button>
+
+        <button
+          v-else
+          class="button"
+          @click="lockFantaGiornata(row.id, true)"
+        >
+          <span class="icon">
+            <i class="fa fa-lock"></i>
+          </span>
+
+          <span>Blocca</span>
+        </button>
+      </b-table-column>
+    </template>
+  </b-table>
+
+  <b-modal
+    :active.sync="isDialogOpen"
+    :can-cancel="!loading"
+  >
+    <div class="modal-card" style="width: auto" has-modal-card trap-focus>
+      <header class="modal-card-head">
+        <p class="modal-card-title">Calcolo Giornata</p>
+      </header>
+
+      <section class="modal-card-body">
+        <b-notification
+          type="is-info"
+          has-icon
+          icon-pack="fa"
+          :closable="false"
+        >
+          Puoi inserire manualmente i voti delle squadre di A, se i voti
+          di una squadra di serie A sono presenti anche su GdS, i voti inseriti
+          manualmente hanno la precedenza.
+        </b-notification>
+
+        <b-field>
+          <b-select
+            v-model="teamToAdd"
+            placeholder="Scegli una Squadra di A"
+            expanded
+          >
+          <option value="atalanta">Atalanta</option>
+          <option value="bologna">Bologna</option>
+          <option value="spezia">Spezia</option>
+          <option value="cagliari">Cagliari</option>
+          <option value="fiorentina">Fiorentina</option>
+          <option value="genoa">Genoa</option>
+          <option value="inter">Inter</option>
+          <option value="juventus">Juventus</option>
+          <option value="lazio">Lazio</option>
+          <option value="milan">Milan</option>
+          <option value="napoli">Napoli</option>
+          <option value="venezia">Venezia</option>
+          <option value="roma">Roma</option>
+          <option value="sampdoria">Sampdoria</option>
+          <option value="sassuolo">Sassuolo</option>
+          <option value="torino">Torino</option>
+          <option value="udinese">Udinese</option>
+          <option value="verona">Verona</option>
+          <option value="salernitana">Salernitana</option>
+          <option value="Empoli">Empoli</option>
+          </b-select>
+
+          <p class="control">
+            <button
+              class="button is-info"
+              :disabled="!teamToAdd"
+              @click="$set(scores, teamToAdd, [{voto: 6.0, goals: 0, autogoals: 0, assists: 0, penalties: 0, failedPenalties: 0, ammonizioni: 0, espulsioni: 0, fantaVoto: 6.0}])"
+            >
+              Inserisci Voti
+            </button>
+          </p>
+        </b-field>
+
+        <div
+          v-for="(teamScores, team) in scores"
+          :key="`score-${team}`"
+        >
+          <div class="is-size-4">{{ team }}</div>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="has-text-centered">Giocatore</th>
+                <th class="has-text-centered">Voto</th>
+                <th class="has-text-centered">Goal</th>
+                <th class="has-text-centered">Auto</th>
+                <th class="has-text-centered">Assist</th>
+                <th class="has-text-centered">Rigori</th>
+                <th class="has-text-centered">Sbagliati</th>
+                <th class="has-text-centered"><img src="/images/live/amm_s.png" alt="Ammonizioni" /></th>
+                <th class="has-text-centered"><img src="/images/live/esp_s.png" alt="Espulsioni" /></th>
+                <th class="has-text-centered">FV</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr
+                v-for="(score, i) in teamScores"
+                :key="`score-${i}`"
+                grouped
+              >
+                <td>
+                  <player-picker
+                    v-model="score.id"
+                    return="IDGazzetta"
+                  ></player-picker>
+                </td>
+
+                <td>
+                  <input
+                    v-model.number="score.voto"
+                    class="input"
+                    type="number"
+                    step="0.5"
+                    min="0"
+                    max="15"
+                    :disabled="!score.id"
+                    @input="updateFantaVoto(score)"
+                  />
+                </td>
+
+                <td>
+                  <input
+                    v-model.number="score.goals"
+                    class="input"
+                    type="number"
+                    step="1"
+                    min="0"
+                    max="10"
+                    :disabled="!score.id"
+                    @input="updateFantaVoto(score)"
+                  />
+                </td>
+
+                <td>
+                  <input
+                    v-model.number="score.autogoals"
+                    class="input"
+                    type="number"
+                    step="1"
+                    min="0"
+                    max="10"
+                    :disabled="!score.id"
+                    @input="updateFantaVoto(score)"
+                  />
+                </td>
+
+                <td>
+                  <input
+                    v-model.number="score.assists"
+                    class="input"
+                    type="number"
+                    step="1"
+                    min="0"
+                    max="20"
+                    :disabled="!score.id"
+                    @input="updateFantaVoto(score)"
+                  />
+                </td>
+
+                <td>
+                  <input
+                    v-model.number="score.penalties"
+                    class="input"
+                    type="number"
+                    step="1"
+                    min="0"
+                    max="10"
+                    :disabled="!score.id"
+                    @input="updateFantaVoto(score)"
+                  />
+                </td>
+
+                <td>
+                  <input
+                    v-model.number="score.failedPenalties"
+                    class="input"
+                    type="number"
+                    step="1"
+                    min="0"
+                    max="10"
+                    :disabled="!score.id"
+                    @input="updateFantaVoto(score)"
+                  />
+                </td>
+
+                <td>
+                  <input
+                    v-model.number="score.ammonizioni"
+                    class="input"
+                    type="number"
+                    step="1"
+                    min="0"
+                    max="2"
+                    :disabled="!score.id"
+                    @input="updateFantaVoto(score)"
+                  />
+                </td>
+
+                <td>
+                  <input
+                    v-model.number="score.espulsioni"
+                    class="input"
+                    type="number"
+                    step="1"
+                    min="0"
+                    max="1"
+                    :disabled="!score.id"
+                    @input="updateFantaVoto(score)"
+                  />
+                </td>
+
+                <td>
+                  <input
+                    v-model.number="score.fantaVoto"
+                    class="input"
+                    type="number"
+                    step="1"
+                    min="0"
+                    max="15"
+                    disabled
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <button
+            class="button is-info"
+            @click="teamScores.push({voto: 6.0, goals: 0, autogoals: 0, assists: 0, penalties: 0, failedPenalties: 0, ammonizioni: 0, espulsioni: 0, fantaVoto: 6.0})"
+          >
+            Aggiungi Voto
+          </button>
+        </div>
+
+        <b-notification
+          v-if="response"
+          :type="response.error ? 'is-danger' : 'is-success'"
+          has-icon
+          icon-pack="fa"
+          :closable="false"
+        >
+          {{ response.error }}
+        </b-notification
+        >
+      </section>
+
+      <footer class="modal-card-foot">
+        <b-switch
+          v-model="seiPolitico"
+          type="is-info"
+        >
+          Usa il 6 Politico per squadre che non hanno giocato
+        </b-switch>
+
+        <div style="flex-grow: 1"></div>
+
+        <b-button
+          class="button"
+          type="button"
+          :disabled="loading"
+          @click="$emit('close')"
+        >
+          Annulla
+        </b-button>
+
+        <b-button
+          class="button is-info"
+          :loading="loading"
+          :disabled="loading"
+          @click="calcolaGiornata(calcDay, scores, seiPolitico)"
+        >
+          Calcola
+        </b-button>
+      </footer>
+    </div>
+  </b-modal>
+</div>
+
+<%- exposeLocalsToBrowser() %>

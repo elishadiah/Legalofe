@@ -1,0 +1,97 @@
+<div id="registra-la-squadra">
+  <div class="box">
+    <div class="is-size-4">Registra la squadra</div>
+    <h5>Manager</h5>
+    <b-field grouped>
+      <b-autocomplete
+        :data="users"
+        field="fullName"
+        placeholder="Manager Name"
+        :loading="loading"
+        expanded
+        @typing="getAsyncData"
+        @select="option => { user = option; }"
+      >
+        <template slot-scope="{ option }">
+          <div class="media">
+            <div class="media-content">
+              <strong>{{ option.fullName }}</strong>
+            </div>
+          </div>
+        </template>
+      </b-autocomplete>
+    </b-field>
+    <h5>Team Name</h5>
+    <div class="columns">
+      <div class="column">
+        <b-input
+        v-model.string="teamName"
+        type="string"
+        placeholder="Team name"
+      ></b-input>
+      </div>
+    </div>
+
+    <div class="columns">
+      <div class="column">
+        <h5>Credits</h5>
+        <b-input
+        v-model.string="credits"
+        type="number"
+        placeholder="Credits"
+        min=0
+      ></b-input>
+      </div>
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="is-size-4">Foto Giocatori</div>
+
+    <div class="columns">
+      <div class="column">
+        <div>
+          <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+
+          <input
+            ref="fileInput"
+            name="photos"
+            class="button"
+            type="file"
+            accept="zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed"
+            @change="onFileChange"
+          />
+
+          <b-button
+            :disabled="!fileSelected"
+            :loading="uploadingPhotos"
+            @click="uploadPhotos"
+          >
+            Carica
+          </b-button>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="notification">
+          Seleziona un file .zip contenente le foto dei giocatori nel formato
+          <em>123123.png</em>, i file possono essere in qualsiasi cartella.
+          <strong>Nota</strong>: se il file zip contiene più versioni della
+          stessa foto (es. 32 e 67px), cancella le foto che non servono dal file
+          zip prima di caricarlo.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="box">
+    <b-button
+    type="is-info"
+  >
+    Submit
+  </b-button>
+  </div>
+</div>
+
+
+<%- exposeLocalsToBrowser() %>

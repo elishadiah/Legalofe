@@ -1,0 +1,227 @@
+
+
+
+/*stili per il CLASSIFICA MARCATORI (File: cannonieri.htm) */
+div#cannonieri   {font-family: Arial; font-size: 9px; width: auto; margin: 0 auto; margin-bottom: 0; border: 0px;}
+table.cannonieri {font-family: Arial; font-size: 9px; width: 100%;}
+table.mom {font-family: Arial; font-size: 9px; width: 100%;}
+
+div#mom   {font-family: Arial; font-size: 9px; width: auto; margin: 0 auto; margin-bottom: 0; border: 0px;}
+
+
+.momTITOLO {
+    font-family: CALIBRI;
+	font-size: 14px;
+	color: #003366;
+    font-weight: bold;
+    vertical-align: middle;
+    background-color:transparent;
+    width: auto;  height: 22px;
+    border-bottom: #C7250A 2px solid;
+
+}
+.momNUMp{padding: 0 0 2px 0;
+    margin: 0 10px 15px 0;
+    border-bottom: 1px dotted #ccc;}
+
+.momNOMEd{padding: 0 0 2px 0;
+    margin: 0 10px 15px 0;
+    border-bottom: 1px dotted #ccc;}
+
+.momNOMEd{padding: 0 0 2px 0;
+    margin: 0 10px 15px 0;
+    border-bottom: 1px dotted #ccc;}
+
+.momNUMd{padding: 0 0 2px 0;
+    margin: 0 10px 15px 0;
+    border-bottom: 1px dotted #ccc;}
+
+tr.cannonieri    { padding: 0 0 2px 0;
+    margin: 0 10px 5px 0;
+    border-bottom: 1px dotted #ccc;}
+
+.canTITOLO       {
+    font-family: CALIBRI;
+	font-size: 14px;
+	color: #003366;
+    font-weight: bold;
+    vertical-align: middle;
+    background-color:transparent;
+    width: auto;  height: 22px;
+    border-bottom: #C7250A 2px solid;
+
+}
+.canGOLd       {padding: 0 0 2px 0;
+    margin: 0 10px 5px 0;
+    border-bottom: 1px dotted #ccc;}
+.canGOLp         {padding: 0 0 2px 0;
+    margin: 0 10px 5px 0;
+    border-bottom: 1px dotted #ccc;}
+.canNOMEd        {padding: 0 0 2px 0;
+    margin: 0 10px 5px 0;
+    border-bottom: 1px dotted #ccc;}
+.canNOMEp        {padding: 0 0 2px 0;
+    margin: 0 10px 5px 0;
+    border-bottom: 1px dotted #ccc;}
+
+/*stili per il ULTIMA GIORNATA E CALENDARIO MARCATORI (File: ultima.htm - calenbomber.htm) */
+
+/*stili per il FANTAMISTER (File: fantamister.htm) */
+div#fm    {font-family: Arial; font-size: 12px; width: 100%; margin: 0 auto; margin-bottom: 0; border: 0px;}
+table.fm  {font-family: Arial; font-size: 12px; color: #333333; width: 100%; border: 0px solid #ffffff; background-color: transparent;}
+tr.fm     {font-family: Arial; font-size: 12px;}
+.fmTITOLO {font-family: Arial; font-size: 12px; color: #ffffff; font-weight: bold; text-align: left; vertical-align: middle; background-color: #366ba2; width: 100%; height: 24px; line-height: 22px; padding-left: 5px; border-bottom: #92C62D 2px solid; border-top: #92C62D 2px solid;}
+/*stili per Tabella: RIEPILOGO TOTALE SCARTO ASSOLUTO*/
+.scartoSQUADRA {font-family: Arial; font-size: 11px; color: #C7250A; font-weight: normal; text-align: center; vertical-align: middle; background-color: transparent; width: 102px; height: 15px; margin-bottom: 0; border-bottom: 1px solid #C7250A;}
+.scartoDATI    {font-family: Arial; font-size: 11px; color: #C7250A; font-weight: normal; text-align: center; vertical-align: middle; background-color: transparent; width: 83px;  height: 15px; margin-bottom: 0; border-bottom: 1px solid #C7250A;}
+/*stili per Tabella: RIEPILOGO TOTALE SCARTO PESATO SU VOTI VALIDI*/
+.riepilogoSQUADRA {font-family: Arial; font-size: 11px; color: #C7250A; font-weight: normal; text-align: center; vertical-align: middle; background-color: transparent; width: 100px; height: 15px; margin-bottom: 0; border-bottom: 1px solid #C7250A;}
+.riepilogoDATI    {font-family: Arial; font-size: 11px; color: #C7250A; font-weight: normal; text-align: center; vertical-align: middle; background-color: transparent; width: 100px; height: 15px; margin-bottom: 0; border-bottom: 1px solid #C7250A;}
+.riepilogoSPAZIO  {font-family: Arial; font-size: 11px; color: #C7250A; font-weight: normal; text-align: center; vertical-align: middle; background-color: transparent; width: 350px; height: 15px; margin-bottom: 0; border-bottom: 1px solid #C7250A;}
+/*stili per Tabella: DETTAGLIO MIGLIORI MODULI - Tutti i tipi*/
+.moduliTITOLO {font-family: Arial; font-size: 11px; color: #C7250A; font-weight: normal;   text-align: center; vertical-align: middle; background-color: transparent; width: 100%; height: 15px; margin-bottom: 0; border-bottom: 1px solid #C7250A;}
+.moduliDATI   {font-family: Arial; font-size: 11px; color: #C7250A; font-weight: normal; text-align: center; vertical-align: middle; background-color: transparent; width: 45%; height: 15px; margin-bottom: 0; border-bottom: 0px solid #C7250A;}
+.moduliIMG    {font-family: Arial; font-size: 11px; color: #C7250A; font-weight: bold;   text-align: center; vertical-align: middle; background-color: transparent; width: 16px;  height: 16px; margin-bottom: 0; border-bottom: 0px solid #C7250A;; background-image: url('img1.png'); background-position:  center 50%; background-repeat: no-repeat }
+/*stili per Tabella: DETTAGLIO GIORNATE*/
+.giornateSQUADRA {font-family: Arial; font-size: 11px; color: #C7250A; font-weight: normal; text-align: center; vertical-align: middle; background-color: transparent; width: 98px;  height: 15px; margin-bottom: 0; border-bottom: 1px solid #C7250A; border-top: 1px solid #C7250A;}
+.giornateSCARTO  {font-family: Arial; font-size: 11px; color: #C7250A; font-weight: normal; text-align: center; vertical-align: middle; background-color: transparent; width: 48px;   height: 15px; margin-bottom: 0; border-bottom: 1px solid #C7250A;border-top: 1px solid #C7250A;}
+.giornateVOTI    {font-family: Arial; font-size: 11px; color: #C7250A; font-weight: normal; text-align: center; vertical-align: middle; background-color: transparent; width: 38px;   height: 15px; margin-bottom: 0; border-bottom: 1px solid #C7250A;border-top: 1px solid #C7250A;}
+.giornateSCAVOTI {font-family: Arial; font-size: 11px; color: #C7250A; font-weight: normal; text-align: center; vertical-align: middle; background-color: transparent; width: 48px;   height: 15px; margin-bottom: 0; border-bottom: 1px solid #C7250A;border-top: 1px solid #C7250A;}
+.giornatePARZ    {font-family: Arial; font-size: 11px; color: #C7250A; font-weight: normal; text-align: center; vertical-align: middle; background-color: transparent; width: 90px;  height: 15px; margin-bottom: 0; border-bottom: 1px solid #C7250A;border-top: 1px solid #C7250A;}
+.giornateMAX     {font-family: Arial; font-size: 11px; color: #C7250A; font-weight: normal; text-align: left; vertical-align: middle; background-color: transparent; width: 328px;  height: 15px; margin-bottom: 0; border-bottom: 1px solid #C7250A;border-top: 1px solid #C7250A;}
+
+
+
+
+.risTITOLO
+{
+ font-size: 12px;
+	color: #003366;
+    font-weight: bold;
+    vertical-align: middle;
+    background-color:transparent;
+    width: auto;  height: 22px;
+    border-bottom: lightgrey 1px solid;
+    text-transform: uppercase;
+    }
+
+ .tpTITOLO
+ {
+	font-size: 12px;
+	color: black;
+    font-weight: bold;
+    vertical-align: middle;
+    background-color:transparent;
+    width: auto;  height: 22px;
+    border-bottom: lightgrey 1px solid;
+    text-transform: uppercase;
+    }
+
+ /*stili per il TOP&FLOP (File: top11.htm - top11s.htm - flop11.htm - flop11s.htm) */
+div#topflop   {
+    padding: 5px 0 5px 0;
+    margin: 0 10px 5px 0;
+    font-size: 12px;
+}
+
+table.topflop {width: 100%;}
+tr.topflop
+    {
+    padding: 5px 0 5px 0;
+    margin: 0 10px 5px 0;
+    border-bottom: 1px dotted #ccc;
+    font-size: 12px;
+    }
+
+.tpNOMEp      {
+    padding: 5px 0 5px 0;
+    margin: 0 10px 5px 0;
+    border-bottom: 1px dotted #ccc;
+    font-size: 12px;
+    }
+
+.tpRUOLOd     {
+    padding: 5px 0 5px 0;
+    margin: 0 10px 5px 0;
+    border-bottom: 1px dotted #ccc;
+    font-size: 12px;
+    }
+
+.tpRUOLOp     {
+    padding: 5px 0 5px 0;
+    margin: 0 10px 5px 0;
+    border-bottom: 1px dotted #ccc;
+    font-size: 12px;
+    }
+
+.tpNOMEd     {
+    padding: 5px 0 5px 0;
+    margin: 0 10px 5px 0;
+    border-bottom: 1px dotted #ccc;
+    font-size: 12px;
+    }
+
+
+div#ris    {
+font-size: 9px;
+width: 100%;
+margin: 0 auto;
+margin-bottom: 0;
+border: 0px;
+}
+table.ris     {
+font-size: 9px;
+width: auto;
+}
+tr.ris     {
+font-size: 10px;
+}
+
+.risSQUADRA   {
+  font-size: 14px;
+  color: #494949;
+  vertical-align: middle;
+  width: 360px;
+  height: 18px;
+  margin-bottom: 0;
+  padding: 0 10px 0 10px;
+  font-weight: bold;
+  }
+
+.risRISULTATO {
+  color: black;
+  padding: .2em;
+  font-size: 18px;
+  font-weight: bold;    vertical-align: middle;
+ }
+
+.risSPAZIO    {
+font-size: 18px; color: black;
+vertical-align: middle;
+width: 11px;
+height: 15px;
+margin-bottom: 0;
+border: 0px;
+font-weight: bold;
+}
+
+.risMARCATORI {
+font-size: 10px;
+color: black;
+vertical-align: middle;
+width: auto;
+height: 15px;
+margin-bottom: 0;
+border: 0px;
+padding: 0 10px 0 10px;
+}
+
+.risMOM       {
+font-size: 10px;
+color: #333333;
+vertical-align: middle;
+width: auto;
+height: 15px;
+border-bottom: 1px dotted #ccc;
+}
+

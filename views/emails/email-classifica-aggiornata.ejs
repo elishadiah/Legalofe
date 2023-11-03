@@ -1,0 +1,5 @@
+<p style="margin-bottom: 25px;">Ciao,</p>
+<p style="margin-bottom: 25px;">La classifica è stata aggiornata alla Giornata n. <%= giornata %></p>
+<div style="margin-bottom: 25px; text-align: center;">
+  <a style="background-color: #28AFB0; display: inline-block; font-size: 1.1em; color: #fff; padding: 10px 35px 10px; font-weight: 500; text-decoration: none; border-radius: 7px;" href="<%= url.resolve(sails.config.custom.baseUrl, '/classifica?Gir=') + (league.fantagiornata ? league.fantagiornata.girone : 1) %>">Vedi la Classifica</a>
+</div>

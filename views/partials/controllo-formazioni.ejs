@@ -1,0 +1,24 @@
+<div class="box">
+  <h2 class="is-size-4">Formazioni Inviate</h2>
+
+  <nav class="panel is-borderless">
+    <% if (standings && nextFantagiornata) {
+        teams.forEach(team => {
+        const standing = standings.find(s => s.team === team.id) %>
+      <a
+        href="/formazioni/?Gio=<%= nextFantagiornata.id %>&Inco=<%= nextMatchesByTeam[team.id] %>"
+        class="panel-block"
+      >
+        <span style="flex:1;"><%= team.name %></span>
+
+        <span class="icon is-medium has-text-<%= (standing && !!standing.players) ? 'success' : 'danger' %>">
+          <i class="fa fa-2x fa-<%= (standing && !!standing.players) ? 'check-circle' : 'times-circle' %>"></i>
+        </span>
+      </a>
+      <% })
+      } else { %>
+      <i><small>Campionato terminato</small></i>
+    <% } %>
+    </tbody>
+  </nav>
+</div>

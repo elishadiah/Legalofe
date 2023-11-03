@@ -1,0 +1,38 @@
+.squadra_rose{
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    font-size: 28px;
+    text-transform: uppercase;
+}
+.image_rose {
+    text-align: center;
+}
+.contenuti{
+    color: black;
+    text-align: left;
+    font-size: 14px;
+    border-bottom: 1px dotted #ccc;
+    padding: 5px 5px 5px 5px;
+
+}
+
+int_rose {
+    padding: 5px 0 5px 0;
+    margin: 0 10px 5px 0;
+    border-bottom: 1px dotted #ccc;
+    font-size: 14px;
+}
+.costi {
+    padding: 5px 0 5px 0;
+    margin: 0 10px 5px 0;
+    border-bottom: 1px dotted #ccc;
+    font-size: 12px;
+}
+ .rose_f
+       {
+    padding: 5px 0 5px 0;
+    margin: 0 10px 5px 0;
+    border-bottom: 1px dotted #ccc;
+    font-size: 12px;
+}

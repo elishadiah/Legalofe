@@ -1,0 +1,133 @@
+/* Ris */
+
+.risnomeleft{
+    border-bottom: 1px dotted #ccc;
+    width:198px;
+    height:20px;
+    text-align:right;
+    padding:15px;
+    font-size:26px;
+    font-weight:bold;
+}
+
+
+.risnome{
+    border-bottom: 1px dotted #ccc;
+    width:198px;
+    height:20px;
+    padding:15px;
+    font-size:26px;
+    font-weight:bold;
+    float:left;
+}
+.risgol{
+    width:16px;
+    height:24px;
+    float:left;
+    text-align:center;
+    padding: 18px 10px 5px;
+    font-size:26px;
+    font-weight:bold;
+    color:black;
+    background-color: #dddddd;
+    border: #ffffff 2px solid;
+}
+
+
+
+.Voto {	font-size:14px;text-align:center;width: 40px; font-weight:bold; }
+.Mod {font-size:12px;text-align:center; width: 40px;}
+.borderDX{font-size:14px;text-align:center; width: 40px; font-weight:bold;}
+.Voto1 {	font-size:12px;text-align:center;width: 30px; font-weight:bold; }
+.Mod1 {font-size:12px;text-align:center; width: 30px;}
+.borderDX1{font-size:12px;text-align:center; width: 30px; font-weight:bold;}
+
+.CellaCentro {
+	text-align: center;
+	vertical-align:middle;
+}
+
+.ris-sq{
+	background-color: #C2F2FF;
+	text-align: center;
+	border-style:hidden;
+}
+
+
+.titcasa{
+	float:right;
+	margin:5px 5px 0 0;
+    border-bottom: 1px dotted #ccc;
+
+}
+.titcasa TD{
+	border-bottom: 1px dotted #ccc;
+}
+.panccasa{
+	float:left;
+	font-size:11px;
+	margin:5px;
+}
+.panccasa TD{
+	border-bottom: 1px dotted #ccc;
+}
+
+.titfuori{
+	float:left;
+	margin:5px 0 0 5px;
+}
+.titfuori TD{
+	border-bottom: 1px dotted #ccc;
+}
+.pancfuori{
+	float:right;
+	font-size:11px;
+	margin:5px;
+
+}
+.pancfuori TD{
+	border-bottom: 1px dotted #ccc;
+}
+
+.ris-mod-casa{
+    color:black;
+    text-align:center;
+	height:22px;
+    font-weight:bold;
+    text-transform: uppercase;
+    font-size:14px;
+
+}
+.ris-parz-casa{
+    color:black;
+    text-align:center;
+	height:22px;
+    font-weight:bold;
+    text-transform: uppercase;
+        font-size:14px;
+
+}
+.ris-mod-fuori{
+    color:black;
+    text-align:center;
+	height:22px;
+    font-weight:bold;
+    text-transform: uppercase;
+        font-size:14px;
+}
+.ris-parz-fuori{
+    color:black;
+    text-align:center;
+	height:22px;
+    font-weight:bold;
+    text-transform: uppercase;
+    font-size:14px;
+}
+
+.ris_gio  {
+    font-size:14px;
+    font-weight:bold;
+    height:30px;
+}
+
+

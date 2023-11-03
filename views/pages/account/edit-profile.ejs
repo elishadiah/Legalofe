@@ -1,0 +1,61 @@
+<div id="edit-profile" v-cloak>
+  <div class="box">
+    <h1 class="is-size-2 has-text-centered">Aggiorna il tuo profilo</h1>
+
+    <ajax-form action="updateProfile" :syncing.sync="syncing" :cloud-error.sync="cloudError" @submitted="submittedForm()" :handle-parsing="handleParsingForm">
+      <div class="field">
+        <label class="label" for="full-name">Nome</label>
+
+        <div class="control">
+          <input
+            class="input"
+            id="full-name"
+            name="full-name"
+            type="text"
+            :class="[formErrors.fullName ? 'is-invalid' : '']"
+            v-model.trim="formData.fullName"
+            placeholder="Mario Rossi"
+            autocomplete="name"
+            focus-first
+          >
+        </div>
+
+        <div class="help is-danger" v-if="formErrors.fullName">Inserisci il tuo nome</div>
+      </div>
+
+      <div class="field">
+        <label for="email-address" class="label">Email</label>
+
+        <div class="control has-icons-left">
+          <input
+            class="input"
+            id="email-address"
+            name="email-address"
+            type="email"
+            :class="[formErrors.emailAddress ? 'is-invalid' : '']"
+            v-model.trim="formData.emailAddress"
+            placeholder="io@gmail.com"
+            autocomplete="email"
+          >
+
+          <span class="icon is-small is-left">
+            <i class="fa fa-envelope"></i>
+          </span>
+        </div>
+        <p class="help is-danger" v-if="formErrors.emailAddress">Email non valida</p>
+      </div>
+
+      <div>
+        <p class="has-text-danger" v-if="cloudError === 'emailAlreadyInUse'">There is already an account using that email address.</p>
+        <p class="has-text-danger" v-else-if="cloudError">An error occured while processing your request. Please check your information and try again, or <a href="/contact">contact support</a> if the error persists.</p>
+      </div>
+
+      <div class="has-text-centered">
+        <ajax-button type="submit" :syncing="syncing" class="button is-success">Salva</ajax-button>
+        <a class="button is-link" href="/account/password">Cambia password</a>
+        <a class="button is-text" href="/">Cancel</a>
+      </div>
+    </ajax-form>
+  </div>
+</div>
+<%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>

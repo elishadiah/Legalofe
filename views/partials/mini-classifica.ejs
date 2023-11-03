@@ -1,0 +1,31 @@
+<div class="box">
+  <h2 class="is-size-4">Classifica</h2>
+
+  <% if (classifica && classifica.length) { %>
+  <table class="table is-hoverable is-fullwidth">
+    <thead>
+      <tr>
+        <th></td>
+        <th class="has-text-right">P.ti</td>
+        <th class="has-text-right">V</td>
+        <th class="has-text-right">N</td>
+        <th class="has-text-right">P</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% classifica.forEach((entry, i) => { %>
+      <tr>
+        <td><%= entry.team.name %></td>
+        <td class="has-text-right"><strong><%= entry.points %></strong></td>
+        <td class="has-text-right"><%= entry.wonHome + entry.wonAway %></td>
+        <td class="has-text-right"><%= entry.drawnHome + entry.drawnAway %></td>
+        <td class="has-text-right"><%= entry.lostHome + entry.lostAway %></td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+  <% } else { %>
+  <i class="has-text-dark"><small>Campionato non iniziato</small></i>
+  <% } %>
+</div>

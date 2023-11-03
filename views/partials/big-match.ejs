@@ -1,0 +1,37 @@
+<h2 class="title-bar is-size-4-tablet is-size-5-mobile">
+  <span style="flex-basis: 50%;">Big Match</span>
+  <% if (nextMatches.length) { %>
+  <%- partial('campionato', { giornata: nextMatches[0].IDFantagiornata }) -%>
+  <% } %>
+</h2>
+
+<% if (bigMatch) { %>
+<div class="match-result__teams">
+  <figure class="image match-result__logo" style="width:48px">
+    <img src="/uploads/<%= bigMatch.teamHome.logo %>" style="width: 48px">
+  </figure>
+
+  <figure class="image match-result__logo" style="width:48px">
+    <img src="/uploads/<%= bigMatch.teamAway.logo %>" style="width: 48px">
+  </figure>
+</div>
+
+<div class="is-flex" style="margin-top: 1em; justify-content: space-around">
+  <div class="match-result__team has-text-right" style="flex: 0">
+    <div class="match-result__team-name is-size-4-tablet is-size-5-mobile">
+      <%= bigMatch.teamHome.name %>
+    </div>
+  </div>
+  <div class="match-result__team has-text-left" style="flex: 0">
+    <div class="match-result__team-name is-size-4-tablet is-size-5-mobile">
+      <%= bigMatch.teamAway.name %>
+    </div>
+  </div>
+</div>
+
+<h3 class="has-text-centered has-text-style-italic has-text-grey">
+  Differenza punti in classifica: <%= bigMatch.pointsDiff %>
+</h3>
+<% } else { %>
+<i class="has-text-dark"><small>Nessun big match trovato</small></i>
+<% } %>

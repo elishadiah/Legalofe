@@ -1,0 +1,34 @@
+<div class="box">
+  <h2 class="is-size-4-tablet is-size-5-mobile"><%= title %></h2>
+
+  <article class="top-player media">
+    <% if (image) { %>
+    <div class="media-left">
+      <figure class="image" style="width:45px">
+        <img src="<%= image %>">
+      </figure>
+    </div>
+    <% } %>
+
+    <div class="media-content" style="overflow:hidden">
+      <div class="content">
+        <div class="top-player__name is-size-5">
+          <strong style="white-space: nowrap"><%= name %></strong>
+
+          <div class="top-player__score is-size-3">
+            <%= value %>
+            <% if (badge) { %>
+            <div class="<%= badgeClass %>">
+              <%= badge %>
+            </div>
+            <% } %>
+          </div>
+        </div>
+
+        <% if (footer) { %>
+        <div class="is-size-6"><%= footer %></div>
+        <% } %>
+      </div>
+    </div>
+  </article>
+</div>

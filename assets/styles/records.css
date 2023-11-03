@@ -1,0 +1,82 @@
+
+table.competizioni {font-family: "Trebuchet MS", Trebuchet, Verdana ,Sans-Serif; font-size: 11px; font-weight: normal; width: 100%; background-color: #FFFFFF;}
+
+td.testata {
+    padding: 11px 15px 0px 10px;
+}
+
+td.comptit {
+ border: 1px solid #ffffff; 
+    background-color:  #EEEEEE; 
+    color: black;	
+    text-align: center;
+    font-family: "Trebuchet MS", Trebuchet, Verdana ,Sans-Serif;
+    
+}
+
+td.comptitneg {
+ border: 1px solid #ffffff; 
+    background-color:  #EEEEEE; 
+    color: black;	
+    text-align: center;
+    font-family: "Trebuchet MS", Trebuchet, Verdana ,Sans-Serif;
+    
+}
+td.compnum {color: #000066; background-color: #FFFFFF; border: 1px solid; width: 5%; border-color: #C0C0C0; padding: 2px; font-weight: bold; text-align: center;}
+
+td.compvuota {
+ padding: 0 0 2px 0; 
+    margin: 0 10px 5px 0; 
+    border-bottom: 1px dotted #ccc;
+    font-size: 12px;
+ 	font-family: "Trebuchet MS", Trebuchet, Verdana ,Sans-Serif;     
+}
+
+td.compsquadra {
+ padding: 0 0 2px 0; 
+    margin: 0 10px 5px 0; 
+    border-bottom: 1px dotted #ccc;
+    font-size: 12px;
+ 	font-family: "Trebuchet MS", Trebuchet, Verdana ,Sans-Serif;     
+    
+}
+
+td.compsquadraneg {
+ padding: 0 0 2px 0; 
+    margin: 0 10px 5px 0; 
+    border-bottom: 1px dotted #ccc;
+    font-size: 12px;
+ 	font-family: "Trebuchet MS", Trebuchet, Verdana ,Sans-Serif;     
+    
+}
+h1.titolo {font-size: 18px; font-weight: bold; line-height: 20px;  background:#FFFFFF url(../images/FC-bgWhite2.bmp) repeat-x bottom;}
+
+
+h1.competizione {
+	font-family: CALIBRI;
+	font-size: 14px; 
+	color: #003366;
+    font-weight: bold; 
+    vertical-align: middle;
+    background-color:transparent; 
+    width: auto;  height: 22px; 
+    border-bottom: #C7250A 2px solid;
+    }
+
+
+h2.aggiorn {font-family: "Trebuchet MS", Verdana, Lucida, helvetica, arial, sans-serif; font-size: 11px; font-weight: normal; line-height: 14px; color: #000066; padding-left: 5px;}
+.cpr {font-family: "Trebuchet MS", Verdana, Lucida, helvetica, arial, sans-serif; font-size: 10px; font-weight: normal; line-height: 14px; color: #999999; background-color: transparent;}
+.cpr2 {font-family: "Trebuchet MS", Verdana, Lucida, helvetica, arial, sans-serif; font-size: 10px; font-weight: bold; line-height: 14px; color: #999999; background-color: transparent;}
+table.nuovirecords {font-family: "Trebuchet MS", Verdana, Lucida, helvetica, arial, sans-serif; font-size: 11px; font-weight: normal; width: 50%; background-color: transparent;}
+td.compnumnr {color: #000066; background-color: #FFFFFF; border: 1px solid #C0C0C0; width: 50%; padding: 2; font-weight: bold; text-align: right;}
+
+h1.varie {
+font-family: CALIBRI;
+	font-size: 14px; 
+	color: #003366;
+    font-weight: bold; 
+    vertical-align: middle;
+    background-color:transparent; 
+    width: auto;  height: 22px; 
+    border-bottom: #C7250A 2px solid;    
+}

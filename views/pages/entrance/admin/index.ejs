@@ -1,0 +1,184 @@
+<div
+    id="admin"
+    class="columns is-multiline"
+    >
+    <div class="column is-one-quarter">
+        <a class="box" href="/admin/campionato">
+            <div class="media">
+                <div class="media-left">
+                    <span class="icon is-large">
+                        <i class="fa fa-calendar fa-3x"></i>
+                    </span>
+                </div>
+
+                <div class="media-content">
+                    <p class="is-size-4 has-weight-bold">
+                        Gestione Giornate
+                    </p>
+                    <em>Salta e calcola giornate, cambia date e scadenze per invio formazione</em>
+                </div>
+
+            </div>
+        </a>
+    </div>
+
+    <div class="column is-one-quarter">
+        <a class="box" href="/admin/nuovo-campionato">
+            <div class="media">
+                <div class="media-left">
+                    <span class="icon is-large">
+                        <i class="fa fa-trophy fa-3x"></i>
+                    </span>
+                </div>
+
+                <div class="media-content">
+                    <p class="is-size-4 has-weight-bold">
+                        Nuovo Campionato
+                    </p>
+                    <em>Iscrivi squadre, crea incontri e calendario</em>
+                </div>
+
+            </div>
+        </a>
+    </div>
+
+    <div class="column is-one-quarter">
+        <a class="box" href="/admin/trasferisci-giocatori">
+            <div class="media">
+                <div class="media-left">
+                    <span class="icon is-large">
+                        <i class="fa fa-users fa-3x"></i>
+                    </span>
+                </div>
+
+                <div class="media-content">
+                    <p class="is-size-4 has-weight-bold">
+                        Gestione Giocatori
+                    </p>
+                    <em>Trasferisci giocatori tra le Fanta Squadre e sincronizza il DB dei giocatori con GdS.</em>
+                </div>
+
+            </div>
+        </a>
+    </div>
+
+    <div class="column is-one-quarter">
+        <a class="box" href="/admin/classifica">
+            <div class="media">
+                <div class="media-left">
+                    <span class="icon is-large">
+                        <i class="fa fa-list fa-3x"></i>
+                    </span>
+                </div>
+
+                <div class="media-content">
+                    <p class="is-size-4 has-weight-bold">
+                        Gestione Classifica
+                    </p>
+                    <em>Cambia punteggi e statistiche della classifica</em>
+                </div>
+
+            </div>
+        </a>
+    </div>
+
+    <div class="column is-half">
+        <div class="box">
+            <div class="is-size-4">
+                Classifica Campionato di
+                <%= classifica[0].girone === 1 ? 'Apertura': 'Clausura' %>
+            </div>
+
+            <div class="field is-grouped">
+                <div class="control is-expanded">
+                    <div class="select is-fullwidth">
+                        <select id="classifica">
+                            <% classifica.forEach(entry => {
+                                %>
+                                <option
+                                    value="<%= entry.id %>"
+                                    >
+                                    <%= entry.team.name %> - P.ti <%= entry.points %>
+                                </option>
+                                <%
+                            }) %>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="control">
+                    <input id="points" class="input" type="number" placeholder="Punti" min="0">
+                </div>
+            </div>
+
+            <button
+                class="button is-info"
+                onclick="setClassifica()"
+                >
+                Imposta punteggio classifica
+            </button>
+        </div>
+    </div>
+
+    <div class="column is-one-quarter">
+        <a class="box" href="https://console.cloud.google.com/storage/browser/legalofe-backup?project=fantalega-lofe">
+            <div class="media">
+                <div class="media-left">
+                    <span class="icon is-large">
+                        <i class="fa fa-database fa-3x"></i>
+                    </span>
+                </div>
+
+                <div class="media-content">
+                    <p class="is-size-4 has-weight-bold">
+                        DB Backup
+                    </p>
+                    <em>File di Backup dell'intero DB su Google Cloud Storage</em>
+                </div>
+               </a>
+    </div>
+
+    <div class="column is-one-quarter">
+        <a class="box" href="/admin/nuovo-campionato">
+            <div class="media">
+                <div class="media-left">
+                    <span class="icon is-large">
+                        <i class="fa fa-trophy fa-3x"></i>
+                    </span>
+                </div>
+
+                <div class="media-content">
+                    <p class="is-size-4 has-weight-bold">
+                        Nuovo Campionato
+                    </p>
+                    <em>Iscrivi squadre, crea incontri e calendario</em>
+                </div>
+
+            </div>
+        </a>
+        </div>
+            </div>
+        </div>
+
+        <script>
+            function setClassifica () {
+                const e = document.getElementById('classifica')
+                const entryId = e.options[e.selectedIndex].value
+                const points = Math.abs(parseInt(document.getElementById('points').value))
+
+                if (!points) {
+                    return
+                }
+
+                $.ajax('/classifica/' + entryId, {
+                    method: 'PATCH',
+                    data: {
+                        points,
+                        _csrf: window.SAILS_LOCALS._csrf
+                    }
+                })
+                .done(() => window.location.reload())
+            }
+        </script>
+
+        <%- exposeLocalsToBrowser() %>

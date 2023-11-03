@@ -1,0 +1,36 @@
+<div class="box">
+  <form method="POST" enctype="multipart/form-data" action="/rose/<%= team.id %>">
+    <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+
+    <div class="field">
+      <label class="label">Nome</label>
+      <div class="control">
+        <input name="name" class="input" type="text" value="<%= team.name %>">
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="file is-boxed">
+        <figure class="image is-96x96 has-background-light">
+          <img src="/uploads/<%= team.logo %>" />
+        </figure>
+
+        <label class="file-label">
+          <input class="file-input" type="file" name="logo" accept=".png">
+
+          <span class="file-cta">
+            <span class="file-icon">
+              <i class="fa fa-upload"></i>
+            </span>
+
+            <span class="file-label">
+              Scegli un file
+            </span>
+          </span>
+        </label>
+      </div>
+    </div>
+
+    <button type="submit" class="button is-success">Salva</button>
+  </form>
+</div>

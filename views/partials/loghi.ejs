@@ -1,0 +1,9 @@
+<div class="columns is-mobile is-vcentered is-multiline">
+  <% teams.forEach(team => { %>
+    <div class="column has-text-centered is-one-fifth-mobile">
+      <a href="rose/<%= team.id %>" class="logo-link">
+        <img src="/uploads/<%= team.logo %>" title="<%= team.name %>">
+      </a>
+    </div>
+  <% }) %>
+</div>

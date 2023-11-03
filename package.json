@@ -1,0 +1,55 @@
+{
+  "name": "fantalega-lofe",
+  "private": true,
+  "version": "1.5.11",
+  "description": "Fantalega LOFE",
+  "keywords": [],
+  "dependencies": {
+    "@sailshq/connect-redis": "^3.2.1",
+    "@sailshq/lodash": "^3.10.3",
+    "@sailshq/socket.io-redis": "^5.2.0",
+    "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.3",
+    "grunt": "1.0.1",
+    "nodemailer": "^6.1.1",
+    "puppeteer": "^18.0.5",
+    "sails": "^1.2.3",
+    "sails-hook-apianalytics": "^2.0.3",
+    "sails-hook-grunt": "^4.0.1",
+    "sails-hook-organics": "^1.0.0",
+    "sails-hook-orm": "^2.1.1",
+    "sails-hook-sockets": "^1.5.5",
+    "sails-hook-uploads": "^0.4.3",
+    "sails-mysql": "^3.0.1",
+    "serve-static": "^1.14.1",
+    "simple-node-logger": "^18.12.22",
+    "skipper-disk": "^0.5.12",
+    "unzipper": "^0.10.10"
+  },
+  "devDependencies": {
+    "@sailshq/eslint": "^4.19.3",
+    "@sailshq/htmlhint": "^0.9.16",
+    "@sailshq/lesshint": "^4.6.6",
+    "nodemon": "^1.18.11",
+    "progress": "^2.0.3"
+  },
+  "scripts": {
+    "dev": "nodemon app.js --watch api/ --watch config/",
+    "build": "grunt prod",
+    "start": "NODE_ENV=production node app.js",
+    "test": "npm run lint && npm run custom-tests && echo 'Done.'",
+    "lint": "eslint . --max-warnings=0 --report-unused-disable-directives && echo '✔  Your .js files look so good.' && htmlhint -c ./.htmlhintrc views/*.ejs && htmlhint -c ./.htmlhintrc views/**/*.ejs && htmlhint -c ./.htmlhintrc views/**/**/*.ejs && htmlhint -c ./.htmlhintrc views/**/**/**/*.ejs && htmlhint -c ./.htmlhintrc views/**/**/**/**/*.ejs && htmlhint -c ./.htmlhintrc views/**/**/**/**/**/*.ejs && htmlhint -c ./.htmlhintrc views/**/**/**/**/**/**/*.ejs && echo '✔  So do your .ejs files.' && lesshint assets/styles/ --max-warnings=0 && echo '✔  Your .less files look good, too.'",
+    "custom-tests": "echo \"(No other custom tests yet.)\" && echo",
+    "deploy": "pm2 deploy production"
+  },
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/luca/fantalega-lofe.git"
+  },
+  "author": "luca",
+  "license": "",
+  "engines": {
+    "node": "^10.15"
+  }
+}

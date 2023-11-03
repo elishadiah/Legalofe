@@ -1,0 +1,31 @@
+<div class="box">
+  <h2 class="title-bar is-size-4-tablet is-size-5-mobile">
+    <span style="flex-basis: 50%;">Prossimo Turno</span>
+    <% if (nextMatches.length) { %>
+    <%- partial('campionato', { giornata: nextMatches[0].IDFantagiornata }) -%>
+    <% } %>
+  </h2>
+
+  <% if (nextMatches.length) { %>
+  <nav class="panel is-borderless has-text-weight-medium">
+    <% if (nextMatches && nextMatches.length) {
+        nextMatches.forEach(match => { %>
+    <div class="panel-block">
+      <div style="flex: 1 1 0; text-align: right"><%= match.teamHome.name %></div>
+      <span class="icon is-medium has-text-<%= sentStandings[match.teamHome.id] ? 'success' : 'danger' %>">
+        <i class="fa fa-<%= sentStandings[match.teamHome.id] ? 'check-circle' : 'times-circle' %>"></i>
+      </span> -
+      <span class="icon is-medium has-text-<%= sentStandings[match.teamAway.id] ? 'success' : 'danger' %>">
+        <i class="fa fa-<%= sentStandings[match.teamAway.id] ? 'check-circle' : 'times-circle' %>"></i>
+      </span>
+      <div style="flex: 1 1 0"><%= match.teamAway.name %></div>
+    </div>
+    <% })
+      } else { %>
+    <div><i class="has-text-dark"><small>Nessun incontro programmato</small></i></div>
+    <% } %>
+  </nav>
+  <% } else { %>
+    <i class="has-text-dark"><small>Campionato terminato</small></i>
+  <% } %>
+</div>

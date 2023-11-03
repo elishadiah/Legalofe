@@ -1,0 +1,22 @@
+<div id="account-overview" v-cloak>
+  <div class="box">
+    <h1 class="is-size-2 has-text-centered">Il mio account</h1>
+
+    <p>
+      Nome:
+      <strong>{{ me.fullName }}</strong>
+    </p>
+
+    <p>
+      Email:
+      <strong :class="[me.emailStatus === 'unconfirmed' || me.emailStatus === 'change-requested' ? 'has-text-dark' : '']">{{me.emailChangeCandidate ? me.emailChangeCandidate : me.emailAddress}}</strong>
+      <span v-if="me.emailStatus === 'unconfirmed' || me.emailStatus === 'change-requested'" class="has-text-danger">Unverified</span>
+    </p>
+
+    <div class="has-text-centered" style="margin-top:2em;">
+      <a class="button is-link" href="/account/profile">Modifica profilo</a>
+      <a class="button is-text" href="/account/password">Cambia password</a>
+    </div>
+  </div>
+</div>
+<%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>

@@ -1,0 +1,129 @@
+<div id="quotazioni" class="box">
+  <div class="field">
+    <label class="label">
+      Squadra di A
+    </label>
+    <div class="control">
+      <div class="buttons has-addons">
+        <span
+          v-for="team in allTeams"
+          class="button is-uppercase"
+          :class="(filters.teamA === team) ? 'is-info is-selected' : ''"
+          @click="updateFilter('teamA',  team)"
+        >
+          {{ team.slice(0,3) }}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">
+      FantaSquadra
+    </label>
+    <div class="control">
+      <div class="buttons has-addons">
+        <span
+          v-for="team in allFantaTeams"
+          class="button"
+          :class="(filters.team === team) ? 'is-info is-selected' : ''"
+          @click="updateFilter('team',  team)"
+        >
+          {{ team }}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Ruolo</label>
+  </div>
+
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <div class="field is-narrow">
+        <div class="control">
+          <div class="buttons has-addons">
+            <span
+              v-for="(num, role) in allRoles"
+              class="button"
+              :class="(filters.role === role) ? 'is-info is-selected' : ''"
+              @click="updateFilter('role',  role)"
+            >
+              {{ role }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <input
+            v-model="nameSearch"
+            class="input"
+            type="text"
+            placeholder="Nome"
+            @input="searchByName"
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table class="table is-hoverable is-fullwidth">
+      <thead>
+        <tr>
+          <th>Squadra</th>
+          <th>FantaSquadra</th>
+          <th>Nome</th>
+          <th>Ruolo</th>
+          <th>Q</th>
+          <th>PG</th>
+          <th>G</th>
+          <th>A</th>
+          <th>AM</th>
+          <th>ES</th>
+          <th>RT</th>
+          <th>RR</th>
+          <th>RS</th>
+          <th>RP</th>
+          <th>MV</th>
+          <th>MM</th>
+          <th>MP</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr
+          v-for="player in filteredPlayers"
+          :key="'player-' + player.name + player.id"
+        >
+          <td class="is-capitalized">{{ player.teamA }}</td>
+          <td>{{ player.player ? player.player.IDSquadra.name : '-' }}</td>
+          <td>{{ player.name }}</td>
+          <td>
+            <span
+              class="player-role"
+              :class="`player-role--${getRoleNumber(player.role)}`">{{ player.role }}</span>
+          </td>
+          <td>{{ player.Q }}</td>
+          <td>{{ player.PG }}</td>
+          <td>{{ player.G }}</td>
+          <td>{{ player.A }}</td>
+          <td>{{ player.AM }}</td>
+          <td>{{ player.ES }}</td>
+          <td>{{ player.RT }}</td>
+          <td>{{ player.RR }}</td>
+          <td>{{ player.RS }}</td>
+          <td>{{ player.RP }}</td>
+          <td>{{ player.MV }}</td>
+          <td>{{ player.MM }}</td>
+          <td>{{ player.MP }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<%- exposeLocalsToBrowser() %>

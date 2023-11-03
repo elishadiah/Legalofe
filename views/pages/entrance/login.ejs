@@ -1,0 +1,80 @@
+<div id="login" v-cloak>
+  <div class="columns">
+    <div class="column is-half is-offset-one-quarter">
+      <div class="box">
+        <h1 class="is-size-2 has-text-centered">Accedi</h1>
+
+        <div class="login-form-container">
+          <ajax-form action="login" :syncing.sync="syncing" :cloud-error.sync="cloudError" :form-data="formData" :form-rules="formRules" :form-errors.sync="formErrors" @submitted="submittedForm()">
+            <div class="field">
+              <label class="label">Email</label>
+
+              <div class="control has-icons-left">
+                <input
+                  v-model.trim="formData.emailAddress"
+                  type="email"
+                  placeholder="io@gmail.com"
+                  class="input"
+                  :class="[formErrors.emailAddress ? 'is-invalid' : '']"
+                  autocomplete="email"
+                  focus-first
+                >
+
+                <span class="icon is-small is-left">
+                  <i class="fa fa-envelope"></i>
+                </span>
+              </div>
+              <p v-if="formErrors.emailAddress" class="help is-danger">Email non valida</p>
+            </div>
+
+            <div class="field">
+              <label class="label">Password</label>
+
+              <div class="control has-icons-left">
+                <input
+                  v-model.trim="formData.password"
+                  type="password"
+                  placeholder="12345"
+                  class="input"
+                  :class="[formErrors.password ? 'is-invalid' : '']"
+                  autocomplete="current-password"
+                >
+
+                <span class="icon is-small is-left">
+                  <i class="fa fa-lock"></i>
+                </span>
+              </div>
+              <p v-if="formErrors.password" class="help is-danger">Inserisci una password</p>
+            </div>
+
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input
+                    type="checkbox"
+                    id="remember"
+                    name="rememberMe"
+                    v-model="formData.rememberMe"
+                  />
+                  Rimani autenticato al prossimo accesso
+                </label>
+              </div>
+            </div>
+
+            <p class="has-text-danger" v-if="cloudError==='badCombo'">
+              <small>Le credenziali di accesso non sono valide. Controlla l'indirizzo email e la password.</small></p>
+            <p class="has-text-danger" v-else-if="cloudError">
+              <small>Si è verificato un errore. Per favore riprova ad effettuare l'accesso.</small></p>
+
+            <div style="margin:1em 0">
+              <ajax-button :syncing="syncing" class="button is-info is-fullwidth">Log in</ajax-button>
+            </div>
+          </ajax-form>
+
+          <p class="has-text-centered"><a href="/password/forgot" class="has-text-info">Hai dimenticato la password?</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>

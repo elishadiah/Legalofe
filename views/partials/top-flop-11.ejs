@@ -1,0 +1,8 @@
+<h2 class="title-bar is-size-4-tablet is-size-5-mobile">
+  <span style="flex-basis: 50%;">Top/Flop di giornata</span>
+  <% if (risultati.length) { %>
+  <%- partial('campionato', { giornata: risultati[0].IDFantagiornata }) -%>
+  <% } %>
+</h2>
+
+<top-flop-11></top-flop-11>
